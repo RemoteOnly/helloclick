@@ -14,8 +14,8 @@ class CreateImageTagTable extends Migration
     public function up()
     {
         Schema::create('image_tag', function (Blueprint $table) {
-            $table->unsignedInteger('image_id');
-            $table->unsignedSmallInteger('tag_id');
+            $table->unsignedInteger('image_id')->comment('图片的id');
+            $table->unsignedSmallInteger('tag_id')->comment('标签的id');
 
             $table->foreign('image_id')
                 ->references('id')
