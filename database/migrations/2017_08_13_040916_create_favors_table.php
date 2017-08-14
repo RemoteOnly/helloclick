@@ -15,9 +15,9 @@ class CreateFavorsTable extends Migration
     {
         Schema::create('favors', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('image_id');
-            $table->unsignedInteger('photographer_id');
+            $table->unsignedInteger('user_id')->comment('用户id');
+            $table->unsignedInteger('image_id')->comment('图片id');
+            $table->unsignedInteger('photographer_id')->comment('摄影师id，即图片的所有人');
             $table->timestamps();
 
             $table->index('image_id');
