@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0185)https://s0.2mdn.net/ads/richmedia/studio/pv2/60198854/20170619222920736/APAC2386_CN_Intel_huaban_2000x60_banner/index.html?e=69&renderingType=2&leftOffset=0&topOffset=0&c=QByigk2cFV&t=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Intel</title>
+<style>
+  *{
+    margin:0px;
+    padding:0px;
+  }
+  #box{width: 2000px;height: 60px;cursor: pointer;}
+</style>
+<script src="./Enabler_01_172.js"></script>
+
+</head><body>
+  <div id="box">
+    <img id="show-img" src="./20736531_20170727183834396_top6.jpg">
+  </div>
+  <script type="text/javascript">
+var report;
+var report_name;
+var exit,content_id;
+var d_id='';
+  window.onload = function(){
+    
+
+    if (Enabler.isInitialized()) {
+      enablerInitHandler();
+    } else {
+      Enabler.addEventListener(studio.events.StudioEvent.INIT,
+    enablerInitHandler);
+    }
+
+    
+
+    
+
+    //trigger floodlight tag
+
+
+  }
+
+  function enablerInitHandler(){
+    Enabler.setProfileId(10001042);
+    var devDynamicContent = {};
+
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_AdId= [{}];
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_AdId[0]._id = 0;
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_AdId[0].isFls = false;
+
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1= [{}];
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0]._id = 0;
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].id = 1;
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].ad_id = [102];
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].content_id = ["B04"];
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].image = {};
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].image.Type = "file";
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].image.Url = "https://s0.2mdn.net/ads/richmedia/studio/20736531/20736531_20170519024341113_s01-top.png";
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].report_name = "ITPortal_B04";
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].exit = {};
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].exit.Url = "http://huaban.com/intel/at01.php";
+    devDynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0].isDefault = true;
+    Enabler.setDevDynamicContent(devDynamicContent);
+
+    console.log('data:'+dynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0]);
+
+    data = dynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_Sheet1[0];
+    data2 = dynamicContent.Dynamic_APAC2386_CN_Intel_Huaban_2000x60_AdId[0];
+    document.getElementById('show-img').src = data.image.Url;
+    report_name = data.report_name;
+    exit = data.exit.Url;
+
+    d_id = data.ad_id[0];
+    content_id = data.content_id[0];
+    console.log('isFls:'+data2.isFls);
+    if(data2.isFls)
+        {
+             console.log(d_id + 'test data id');
+            triggerFls();
+            
+        }
+
+    setCounter();
+    // setExit();
+
+  }
+
+  function triggerFls()
+{
+    console.log('content_id:' +content_id);
+    var FL_smartzone = "https://2218289.fls.doubleclick.net/activityi;src=2218289;type=y17q20;cat=q2des0;u20=" + content_id + '';
+    if (document.getElementById("DCLK_FLDiv"))
+    {
+        var flDiv = document.getElementById("DCLK_FLDiv"); 
+    }
+    else { 
+        var flDiv = document.body.appendChild(document.createElement("div"));
+        flDiv.id="DCLK_FLDiv"; 
+        flDiv.style.display = "none"; 
+    }
+
+    var DCLK_FLIframe = document.createElement("iframe"); 
+    DCLK_FLIframe.id = "DCLK_FLIframe_9012";
+    DCLK_FLIframe.src = FL_smartzone +";ord=1;num=" + new Date()*1;
+    flDiv.appendChild(DCLK_FLIframe);
+}
+
+  //exit
+    document.getElementById('box').addEventListener('click', setExit);
+    
+
+    function setCounter(){
+        Enabler.counter(report_name + "_Show",true);
+    }
+    function setExit(){
+        Enabler.exitOverride(report_name+'_Exit', exit);
+      
+
+    }
+
+    function setMetrics(){
+      Enabler.counter("ITPortal_B04_Show",true);
+      Enabler.counter("ITPortal_B05_Show",true);
+      Enabler.counter("ITPortal_B06_Show",true);
+      Enabler.counter("ITPortal_B07_Show",true);
+      Enabler.counter("ITPortal_B08_Show",true);
+
+      Enabler.counter("DesignerPC_B04_Show",true);
+      Enabler.counter("DesignerPC_B05_Show",true);
+      Enabler.counter("DesignerPC_B06_Show",true);
+      Enabler.counter("DesignerPC_B07_Show",true);
+      Enabler.counter("DesignerPC_B08_Show",true);
+      Enabler.counter("DesignerPC_A01_Show",true);
+      Enabler.counter("DesignerPC_A02_Show",true);
+      Enabler.counter("DesignerPC_A03_Show",true);
+      Enabler.counter("DesignerPC_C09_Show",true);
+
+      Enabler.counter("Default_B04_Show",true);
+      Enabler.counter("Default_B05_Show",true);
+      Enabler.counter("Default_B06_Show",true);
+      Enabler.counter("Default_B07_Show",true);
+      Enabler.counter("Default_B08_Show",true);
+      Enabler.counter("Default_A01_Show",true);
+      Enabler.counter("Default_A02_Show",true);
+      Enabler.counter("Default_A03_Show",true);
+      Enabler.counter("Default_C09_Show",true);
+
+      Enabler.exitOverride('ITPortal_B04_Exit', exit);
+      Enabler.exitOverride('ITPortal_B05_Exit', exit);
+      Enabler.exitOverride('ITPortal_B06_Exit', exit);
+      Enabler.exitOverride('ITPortal_B07_Exit', exit);
+      Enabler.exitOverride('ITPortal_B08_Exit', exit);
+
+       Enabler.exitOverride('DesignerPC_A01_Exit', exit);
+        Enabler.exitOverride('DesignerPC_A02_Exit', exit);
+        Enabler.exitOverride('DesignerPC_A03_Exit', exit);
+        Enabler.exitOverride('DesignerPC_B04_Exit', exit);
+        Enabler.exitOverride('DesignerPC_B05_Exit', exit);
+        Enabler.exitOverride('DesignerPC_B06_Exit', exit);
+        Enabler.exitOverride('DesignerPC_B07_Exit', exit);
+        Enabler.exitOverride('DesignerPC_B08_Exit', exit);
+        Enabler.exitOverride('DesignerPC_C09_Exit', exit);
+
+        Enabler.exitOverride('Default_A01_Exit', exit);
+        Enabler.exitOverride('Default_A02_Exit', exit);
+        Enabler.exitOverride('Default_A03_Exit', exit);
+        Enabler.exitOverride('Default_B04_Exit', exit);
+        Enabler.exitOverride('Default_B05_Exit', exit);
+        Enabler.exitOverride('Default_B06_Exit', exit);
+        Enabler.exitOverride('Default_B07_Exit', exit);
+        Enabler.exitOverride('Default_B08_Exit', exit);
+        Enabler.exitOverride('Default_C09_Exit', exit);
+
+    }
+  
+  </script>
+
+
+<div id="DCLK_FLDiv" style="display: none;"><iframe id="DCLK_FLIframe_9012" src="./activityi.html"></iframe></div></body></html>
