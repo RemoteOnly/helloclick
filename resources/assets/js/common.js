@@ -51,6 +51,18 @@ $('#nav_user').hover(function () {
     $('.menu').hide();
 });
 
+$('.menu-nav').hover(function () {
+    $('.header-main-menu').show();
+}, function () {
+    $('.header-main-menu').delay(10000).hide(0);
+});
+
+$('.header-main-menu').hover(function () {
+    $(this).stop(true, true);
+}, function () {
+    $(this).hide();
+});
+
 //endregion
 
 //region Ajax注册/登录

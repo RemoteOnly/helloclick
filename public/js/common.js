@@ -2530,7 +2530,7 @@ module.exports = Validator;
 
 /***/ }),
 
-/***/ "./resources/assets/js/login_register.js":
+/***/ "./resources/assets/js/common.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var Validator = __webpack_require__("./node_modules/validatorjs/src/validator.js");
@@ -2584,6 +2584,18 @@ $('#nav_user').hover(function () {
     $('.menu').show();
 }, function () {
     $('.menu').hide();
+});
+
+$('.menu-nav').hover(function () {
+    $('.header-main-menu').show();
+}, function () {
+    $('.header-main-menu').delay(10000).hide(0);
+});
+
+$('.header-main-menu').hover(function () {
+    $(this).stop(true, true);
+}, function () {
+    $(this).hide();
 });
 
 //endregion
@@ -2827,7 +2839,7 @@ function activeResend(time) {
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("./resources/assets/js/login_register.js");
+module.exports = __webpack_require__("./resources/assets/js/common.js");
 
 
 /***/ })

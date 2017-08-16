@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Model\User;
+use App\Models\User;
 use Auth;
 use Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
-
     /**
      * Create a new controller instance.
      *

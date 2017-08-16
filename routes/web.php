@@ -11,15 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.index.index');
-})->name('index');
-Route::get('/show', function () {
-    return view('home.index.show');
-})->name('show');
-Route::get('/settings', function () {
-    return view('home.setting.index');
-})->name('setting');
+
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('/show', 'HomeController@show')->name('show');
+Route::get('/settings', 'UserController@index')->name('settings');
 
 
 Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {

@@ -3,18 +3,14 @@
 @section('content')
     <div class="wrapper" style="width: 1244px">
         <div class="category-image-box favorite">
-            <a href="http://huaban.com/muse/register" target="_blank"
-               title="花瓣，陪你做生活的设计师" rel="nofollow" class="category-image">
-                <img width="236" height="126"
-                     src="https://hbfile.b0.upaiyun.com/img/category_page/0e7d8b6fcf7a364f13cceebc33aaeee562e2a00dea40"
-                     data-baiduimageplus-ignore="1">
-            </a>
-            <a href="http://huaban.com/explore/meishisheying/?md=newbn&amp;photography" target="_blank"
-               title="美食摄影" rel="nofollow" class="category-image">
-                <img width="236" height="126"
-                     src="https://hbfile.b0.upaiyun.com/img/category_page/f46995bfa083f6c984b18c52789b272f46eaa97db3dd"
-                     data-baiduimageplus-ignore="1">
-            </a>
+            @foreach($favorites as $favorite)
+                <a href="http://huaban.com/explore/meishisheying/?md=newbn&amp;photography" target="_blank"
+                   title="{{ $favorite->name }}" rel="nofollow" class="category-image">
+                    <img width="236" height="126"
+                         src="https://hbfile.b0.upaiyun.com/img/category_page/f46995bfa083f6c984b18c52789b272f46eaa97db3dd"
+                         data-baiduimageplus-ignore="1">
+                </a>
+            @endforeach
         </div>
         <div id="waterfall" style="height: 2209px;">
             <div class="pin wfc recommends wft" style="position: absolute; left: 0px; top: 0px;">
@@ -92,8 +88,7 @@
                 </div>
             </div>
 
-            <div data-id="1272656784" data-seq="1272656784" data-source="null" data-created-at="1502613073"
-                 class="pin wfc wft" style="position: absolute; left: 504px; top: 0px;">
+            <div class="pin wfc wft" style="position: absolute; left: 504px; top: 0px;">
                 <div class="hidden">
                     <a href="/lmkgjgj/">♛Dimo</a>采集到<a href="/boards/34522230">【黑与白】</a>
                 </div>

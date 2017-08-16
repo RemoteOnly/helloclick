@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
+use Cache;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $favorites = Cache::remember('favorites', 24 * 60, function () {
+            $favorites = Tag::favorite()->get();
+            return $favorites;
+        });
+
+        return view('home.index.index', compact('favorites'));
+    }
+
+    public function show(Request $request)
+    {
+        return view('home.index.show');
     }
 }

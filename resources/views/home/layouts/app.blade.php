@@ -12,6 +12,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/self.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common2.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugin/sweetalert2/dist/sweetalert2.min.css') }}">
     <script src="{{ asset('/plugin/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     @section('css')
@@ -41,7 +43,7 @@
         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
     });
 </script>
-<script src="{{ mix('/js/login_register.js') }}"></script>
+<script src="{{ mix('/js/common.js') }}"></script>
 @section('script')
 @show
 

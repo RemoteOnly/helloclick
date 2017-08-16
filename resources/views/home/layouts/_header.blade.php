@@ -3,45 +3,25 @@
         <div class="menu-bar">
             <div class="left-part">
                 <a id="huaban" href="/"></a>
-                <a href="/discovery/" class="header-item ">发现</a>
-                <a href="/all/" class="header-item ">最新</a>
-                <a href="https://muse.huaban.com/" class="header-item meisi">美思</a>
-                <a href="/activities/" rel="nofollow" class="header-item meisi">活动<i class="muse entrance"></i></a>
-                <a href="http://meia.me" target="_blank" class="header-item">教育</a>
+                @foreach($banners as $key => $banner)
+                    @break($key > 6)
+                    <a href="http://meia.me" target="_blank" class="header-item">{{ $banner->name }}</a>
+                @endforeach
                 <div class="menu-nav">
                     <div class="header-main-menu">
-                        <div class="top-module">
-                            <a href="http://live.huaban.com/" rel="nofollow" class="text app-link">花瓣live</a>
-                            <a href="/apps/" rel="nofollow" class="text app-link">移动应用</a>
-                            <a href="/about/goodies/" rel="nofollow" class="text repin-link">采集工具</a>
+                        <div class="top-module" style="text-align:center">
+                            <a href="javascript:void(0);" class="text app-link">这有更多</a>
                         </div>
                         <div id="category_more" class="middle-module clearfix">
-                            <div class="col-1 col">
-                                <a href="/favorite/web_app_icon/" rel="nofollow" data-id="web_app_icon"
-                                   class="category-link">UI/UX</a>
-                                <a href="/favorite/design/" rel="nofollow" data-id="design" class="category-link">平面</a>
-                                <a href="/favorite/illustration/" rel="nofollow" data-id="illustration"
-                                   class="category-link">插画/漫画</a>
-                                <a href="/favorite/home/" rel="nofollow" data-id="home" class="category-link">家居/家装</a>
-                                <a href="/favorite/apparel/" rel="nofollow" data-id="apparel" class="category-link">女装/搭配</a>
-                            </div>
-                            <div class="col-2 col">
-                                <a href="/favorite/men/" rel="nofollow" data-id="men"
-                                   class="category-link">男士/风尚</a>
-                                <a href="/favorite/wedding_events/" rel="nofollow" data-id="wedding_events"
-                                   class="category-link">婚礼</a>
-                                <a href="/favorite/industrial_design/" rel="nofollow" data-id="industrial_design"
-                                   class="category-link">工业设计</a>
-                                <a href="/favorite/photography/" rel="nofollow" data-id="photography"
-                                   class="category-link">摄影</a>
-                                <a href="/categories/" rel="nofollow" data-id="more"
-                                   class="all-categories-link category-link">兴趣/生活 »</a>
-                            </div>
+                            @foreach($banners->slice(7)->chunk(5) as $col_num => $group)
+                                <div class="col-{{$col_num + 1}} col">
+                                    @foreach($group as $item)
+                                        <a href="#" class="category-link">{{ $item->name }}</a>
+                                    @endforeach
+                                </div>
+                            @endforeach
                         </div>
                         <div class="bottom-module clearfix">
-                            <div icon="pin-icon" onclick="app.switchHeaderTo('side');return false;" class="to-side">
-
-                            </div>
                             <div class="links">
                                 <a href="/about/" rel="nofollow">关于</a><span>·</span>
                                 <a href="/pins/53553/" rel="nofollow">反馈</a><span>·</span>

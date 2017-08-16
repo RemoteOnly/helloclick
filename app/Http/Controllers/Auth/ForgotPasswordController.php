@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\SendResetLinkEmailEvent;
 use App\Http\Controllers\Controller;
-use App\Model\PasswordReset;
-use App\Model\User;
+use App\Models\PasswordReset;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;

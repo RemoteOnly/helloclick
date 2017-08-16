@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Model\PasswordReset;
-use App\Model\User;
+use App\Models\PasswordReset;
+use App\Models\User;
 use Auth;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
