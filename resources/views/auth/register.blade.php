@@ -5,11 +5,6 @@
     <meta name="copyright" content="huaban.com"/>
     <meta name="referrer" content="always"/>
     <title>登录花瓣</title>
-    <link rel="apple-touch-icon" href="http://huaban.com/img/touch-icon-iphone.png"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="http://huaban.com/img/touch-icon-ipad.png"/>
-    <link rel="apple-touch-icon" sizes="120x120" href="http://huaban.com/img/touch-icon-iphone-retina.png"/>
-    <link rel="apple-touch-icon" sizes="152x152" href="http://huaban.com/img/touch-icon-ipad-retina.png"/>
-    <link rel="canonical" href="http://huaban.com/login/"/>
     <meta name="keywords"
           content="家居、旅行、美食、造型&#47;妆发、摄影、服饰&#47;搭配&#47;街拍、童真、婚纱&#47;婚礼、宠物、手工&#47;布艺&#47;玩物、建筑、创意&#47;设计、人物、电影、音乐、图书、美女、数据"/>
     <meta name="description" content="花瓣网,帮你收集,发现网络上你喜欢的事物.你可以用它收集灵感,保存有用的素材,计划旅行,晒晒自己想要的东西"/>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('home.layouts.app')
 
 @section('content')
     <div id="pin_view_page">
@@ -223,8 +223,9 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" onclick="return false;" class="load-more-board btn btn18"><span
-                                    class="text"> 加载更多</span></a>
+                        <a href="#" onclick="return false;" class="load-more-board btn btn18">
+                            <span class="text"> 加载更多</span>
+                        </a>
                     </div>
                     <div id="recommend-pins">
                         <div class="title-el">推荐给你的采集</div>
@@ -303,25 +304,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="black-overlay">
-        <div id="login_frame" style="margin-top: -215px;">
-            <img src="/img/logo_2x.png" width="106" height="36" data-baiduimageplus-ignore="1" class="logo">
-            <div style="display: block;" class="login">
-                <div class="holder">
-                    <div class="with-line">使用第三方帐号登录</div>
-                    <div class="buttons small">
-                        <a href="/oauth/weibo/instant_login/?_ref=frame" title="微博帐号登录"
-                           rel="nofollow" class="weibo"></a>
-                        <a href="/oauth/qzone/instant_login/?_ref=frame" title="QQ帐号登录" rel="nofollow"
-                           class="qzone"></a>
-                        <a href="/oauth/wechat/instant_login/?_ref=frame" title="微信帐号登录"
-                           rel="nofollow" class="wechat"></a>
-                    </div>
-                </div>
-            </div>
-            <div class="close"><i></i></div>
         </div>
     </div>
 @endsection

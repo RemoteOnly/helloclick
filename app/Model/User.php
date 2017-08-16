@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'photo'
     ];
 
     /**
@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //region Scopes
+    public function scopeEmailConfirmed()
+    {
+        return $this->where('email_confirmed', 'yes');
+    }
+
+    public function scopeEmailUnconfirmed()
+    {
+        return $this->where('email_confirmed', 'no');
+    }
+    //endregion
 }

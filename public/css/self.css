@@ -1,0 +1,7 @@
+.input-error {
+    border-color: red;
+}
+
+.disabled {
+    pointer-events: none;
+}

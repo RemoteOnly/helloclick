@@ -35,4 +35,24 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'wechat' => [
+
+    ],
+
+    'qq' => [
+
+    ],
+
+    'weibo' => [
+        'client_id' => 'your-github-app-id',
+        'client_secret' => 'your-github-app-secret',
+        'redirect' => 'http://your-callback-url',
+    ],
+
+    'facebook' => [
+        'client_id' => '1472962926120555',
+        'client_secret' => 'c0b55a8bb6a4cc58eb95fe051249ee23',
+        'redirect' => env('APP_URL')
+    ]
+
 ];

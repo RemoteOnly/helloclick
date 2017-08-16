@@ -2,33 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Model\User;
 use App\Http\Controllers\Controller;
+use Auth;
+use Cache;
+use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
     /**
      * Create a new controller instance.
      *
@@ -40,9 +24,71 @@ class RegisterController extends Controller
     }
 
     /**
+     * Register a user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+        if ($user) {
+            //  发送验证邮件
+            event(new Registered($user));
+            return response()->json(['status' => 1, 'message' => '注册成功，请前往邮箱去激活']);
+        } else {
+            // 注册失败
+            return response()->json(['status' => 0, 'message' => '注册失败，请刷新页面重新再试']);
+        }
+    }
+
+    /**
+     * Active the user
+     * @param Request $request
+     * @param $id
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function active(Request $request, $id, $token)
+    {
+        $key = 'active_token_' . $id;
+        $_token = Cache::get($key, Carbon::now());
+        if ($token !== $_token) {
+            flash()->message('该链接已失效，请重新发送验证', 'error');
+        } else {
+            $user = User::find($id);
+            $user->email_confirmed = 'yes';
+            $user->save();
+            flash()->message('欢迎回来', 'success');
+            Auth::loginUsingId($id);
+            // 清除token
+            Cache::forget($key);
+        }
+
+        return redirect()->route('index');
+    }
+
+    public function resend(Request $request)
+    {
+        $email = $request->get('email');
+        $user = User::emailUnconfirmed()->where('email', $email)->first();
+        if ($user) {
+            event(new Registered($user));
+            $message = ['status' => 1, 'message' => '已经发送激活链接，请检查邮件并激活'];
+        } else {
+            $message = ['status' => 0, 'message' => '未找到对应的用户'];
+        }
+
+        return response()->json($message);
+    }
+
+    //region Functions
+
+    /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -57,15 +103,19 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param  array $data
+     * @return \App\Model\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        return $user;
     }
+
+    //endregion
 }

@@ -3455,7 +3455,7 @@ a.remove_activity_rec:hover, a.remove_activity_invite:hover {
 }
 
 /*.menu-bar .login-nav .register {*/
-    /*margin-right: 10px*/
+/*margin-right: 10px*/
 /*}*/
 
 .menu-bar .login-nav .register, .menu-bar .login-nav .login {
@@ -14887,7 +14887,7 @@ h1#thin_logo {
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, .3);
-    z-index: 99998
+    z-index: 1000
 }
 
 #category_nav_bar {

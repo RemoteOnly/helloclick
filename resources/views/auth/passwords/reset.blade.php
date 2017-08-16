@@ -1,76 +1,46 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
-                        {{ csrf_field() }}
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="copyright" content="huaban.com"/>
+    <meta name="referrer" content="always"/>
+    <title>登录花瓣</title>
+    <meta name="keywords"
+          content="家居、旅行、美食、造型&#47;妆发、摄影、服饰&#47;搭配&#47;街拍、童真、婚纱&#47;婚礼、宠物、手工&#47;布艺&#47;玩物、建筑、创意&#47;设计、人物、电影、音乐、图书、美女、数据"/>
+    <meta name="description" content="花瓣网,帮你收集,发现网络上你喜欢的事物.你可以用它收集灵感,保存有用的素材,计划旅行,晒晒自己想要的东西"/>
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://huaban.com/login/">
+    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+    <link rel="stylesheet" href="http://huaban.com/css/signup-tel.css?1474974202.css">
+</head>
+<body>
+<div id="page" class="page-min-width" style="display: block;">
+    <div id="signup-tel">
+        <div class="segment">
+            <div class="header">
+                <div class="logo"></div>
+            </div>
+        </div>
+    </div>
+    <div id="login_frame">
+        <div class="login">
+            <div class="holder">
+                <h2 class="title">嗨！请重置密码</h2>
+                <form action="{{ route('auth.reset_password') }}" method="post" class="mail-login">
+                    @include('home.layouts._errors')
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+                    <input type="text" disabled value="{{ $email }}" class="clear-input">
+                    <input type="password" name="password" placeholder="新密码" class="clear-input">
+                    <input type="password" name="password_confirmation" placeholder="确认新密码" class="clear-input">
+                    <input type="hidden" name="email" value="{{ $email }}" class="clear-input">
+                    <input type="hidden" name="token" value="{{ $token }}" class="clear-input">
+                    <button type="submit" class="btn btn18 rbtn">提交</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<div class="clear"></div>
+<div id="page_overlay" style="display: none;" class="overlay"></div>
+</body>
+</html>
