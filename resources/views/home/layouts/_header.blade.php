@@ -8,7 +8,7 @@
                     <a href="http://meia.me" target="_blank" class="header-item">{{ $banner->name }}</a>
                 @endforeach
                 <div class="menu-nav">
-                    <div class="header-main-menu">
+                    <div class="header-main-menu" style="display: none">
                         <div class="top-module" style="text-align:center">
                             <a href="javascript:void(0);" class="text app-link">这有更多</a>
                         </div>

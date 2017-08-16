@@ -12,7 +12,10 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+
+use App\Models\User;
+
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -20,5 +23,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(\App\Models\Image::class, function (\Faker\Generator $faker) {
+    $user_ids = User::pluck('id')->toArray();
+    return [
+        'name' => $faker->name,
+        'url' => $faker->imageUrl(),
+        'user_id' => array_first(array_random($user_ids, 1)),
+        'description' => $faker->paragraph
     ];
 });

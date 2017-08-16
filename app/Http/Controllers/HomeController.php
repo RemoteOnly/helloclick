@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Tag;
 use Cache;
 use Illuminate\Http\Request;
@@ -36,5 +37,16 @@ class HomeController extends Controller
     public function show(Request $request)
     {
         return view('home.index.show');
+    }
+
+    public function loadImages(Request $request)
+    {
+        $offset = $request->get('offset', 0);
+        $limit = $request->get('limit', 20);
+
+        $images = Image::with(['tags', 'user'])->orderBy('created_at')
+            ->offset($offset)->limit($limit)->get();
+
+        return response()->json($images);
     }
 }

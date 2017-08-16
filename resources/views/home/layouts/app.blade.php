@@ -20,7 +20,7 @@
     @show
 </head>
 <body>
-<div id="page" class="page-min-width page-with-header" style="display: block;">
+<div id="page" class="page-min-width page-with-header" style="display: block;" url="{{ route('load_images') }}">
     @include('home.layouts._header')
 
     @section('content')
@@ -43,9 +43,10 @@
         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
     });
 </script>
-<script src="{{ mix('/js/common.js') }}"></script>
+
 @section('script')
 @show
+<script src="{{ mix('/js/common.js') }}"></script>
 
 </body>
 </html>

@@ -13,6 +13,7 @@
 
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/load_images', 'HomeController@loadImages')->name('load_images');
 Route::get('/show', 'HomeController@show')->name('show');
 Route::get('/settings', 'UserController@index')->name('settings');
 

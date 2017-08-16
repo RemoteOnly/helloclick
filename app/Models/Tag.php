@@ -21,6 +21,9 @@ class Tag extends Model
     //endregion
 
     //region 关联关系
-
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'tag_id', 'images_id');
+    }
     //endregion
 }
