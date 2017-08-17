@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +180,15 @@ return [
         // Debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        // Socialite
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
+        // Flash
+        Laracasts\Flash\FlashServiceProvider::class,
+
+        // Language
+        Overtrue\LaravelLang\TranslationServiceProvider::class,
+
     ],
 
     /*
@@ -232,6 +241,8 @@ return [
         // Debugbar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
+        // Socialite
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

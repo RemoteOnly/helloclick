@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('图片名');
             $table->unsignedInteger('user_id')->comment('发布人id');
+            $table->string('url')->comment('图片地址');
             $table->unsignedInteger('view_count')->default(0)->comment('图片浏览量');
             $table->unsignedInteger('comment_count')->default(0)->comment('图片评论量');
             $table->unsignedInteger('favor_count')->default(0)->comment('图片点赞量');

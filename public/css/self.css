@@ -1,0 +1,12 @@
+.input-error {
+  border-color: red;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.tag {
+  margin-right: 3px;
+}
+
