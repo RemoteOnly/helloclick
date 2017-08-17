@@ -12,8 +12,9 @@
                 </a>
             @endforeach
         </div>
-        <div id="waterfall" style="height: 2209px;">
-            <div class="pin wfc recommends wft" style="position: absolute; left: 0px; top: 0px;">
+        <div id="waterfall" style="">
+            <div class="pin  recommends wft waterfall-item" style="position: absolute; left: 0px; top: 0px;"
+                 data-index="0">
                 <div class="recommend users">
                     <a href="/users/favorite/photography/" class="header">推荐用户
                         <div class="more link">»</div>
@@ -64,31 +65,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="recommend boards">
-                    <a href="/boards/favorite/photography" class="header">推荐画板
-                        <div class="more link">»</div>
-                    </a>
-                    <div class="image">
-                        <a href="/boards/35049603/">
-                            <img src="//img.hb.aicdn.com/e19cc2c1006d04e71c08f94e729d8701e7c3619012b47-RQzJG0_sq320"
-                                 width="320" height="320" data-baiduimageplus-ignore="1">
-                        </a>
-                        <div style="background-image: url(//img.hb.aicdn.com/e19cc2c1006d04e71c08f94e729d8701e7c3619012b47-RQzJG0_sq236bl4)"
-                             class="wrap">
-                            <div class="description">
-                                <a href="/boards/35049603" class="title">舞动青春</a>
-                                <span class="info">959 采集</span>
-                                <span class="info">699 关注</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer attribution">来自
-                        <a href="/iloveff8/" title="来自于viviwo5" class="link">viviwo5</a>
-                    </div>
-                </div>
             </div>
 
-            <waterfall v-for="item in items"></waterfall>
+            <waterfall v-for="item in items" :item='item' :key="item.id" :data-index="item.id"></waterfall>
         </div>
         <div class="loading" style="display: block;">
             <img src="/img/loading.gif">

@@ -21,4 +21,7 @@ class Image extends Model
         return $this->belongsTo(User::class)->select(['id', 'name', 'photo']);
     }
     //endregion
+
+    //region Scopes
+    //endregion
 }

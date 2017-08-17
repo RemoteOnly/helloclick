@@ -1659,47 +1659,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     // 属性，对外开放接口
     props: {
-        url: ''
+        item: {}
     },
-    data: function data() {
-        return {
-            item: {}
-        };
-    },
+    mounted: function mounted() {},
 
-    methods: {
-        calculatePosition: function calculatePosition() {}
-    },
-    computed: {
-        position: function position() {
-            return { absolute: 'absolute', left: 0, right: 0, height: 0 };
-        }
-    }
+    methods: {},
+    computed: {}
 });
 
 /***/ }),
@@ -31766,34 +31735,60 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "pin wfc wft",
     style: ({
-      position: _vm.position.absolute,
-      left: _vm.position.left + 'px',
-      top: _vm.position.top + 'px'
-    })
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('p', {
-    staticClass: "description",
+      position: _vm.item.position,
+      left: _vm.item.left + 'px',
+      top: _vm.item.top + 'px'
+    }),
     attrs: {
-      "data-raw": "雾中露营"
+      "left_bottom": _vm.item.left_bottom
     }
-  }, [_vm._v("雾中露营")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "comments muted",
+  }, [_vm._m(0), _vm._v(" "), _c('a', {
+    staticClass: "img x layer-view loaded",
+    attrs: {
+      "href": "/pins/1272656784/",
+      "target": "_self"
+    }
+  }, [_c('div', {
+    staticClass: "default-bg"
+  }), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": _vm.item.url,
+      "width": "236",
+      "data-baiduimageplus-ignore": "1"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "stop",
     staticStyle: {
       "display": "none"
     }
-  }), _vm._v(" "), _vm._m(4)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "hidden"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "cover"
+  })]), _vm._v(" "), _c('p', {
+    staticClass: "description"
+  }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c('div', {
+    staticClass: "convo attribution clearfix"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_c('div', {
+    staticClass: "inner"
+  }, [_c('div', {
+    staticClass: "line"
   }, [_c('a', {
+    staticClass: "author x",
     attrs: {
-      "href": "/lmkgjgj/"
+      "href": _vm.item.user.photo
     }
-  }, [_vm._v("♛Dimo")]), _vm._v("采集到"), _c('a', {
-    attrs: {
-      "href": "/boards/34522230"
-    }
-  }, [_vm._v("【黑与白】")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  }, [_vm._v("♛" + _vm._s(_vm.item.user.name))])]), _vm._v(" "), _c('div', {
+    staticClass: "line"
+  }, _vm._l((_vm.item.tags), function(tag) {
+    return _c('a', {
+      staticClass: "tag",
+      attrs: {
+        "href": "/boards/34522230/"
+      }
+    }, [_vm._v(_vm._s(tag.name))])
+  }))])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "actions"
   }, [_c('div', {
@@ -31813,39 +31808,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "img x layer-view loaded",
-    attrs: {
-      "href": "/pins/1272656784/",
-      "target": "_self",
-      "rel": ""
-    }
-  }, [_c('div', {
-    staticClass: "default-bg"
-  }), _vm._v(" "), _c('img', {
-    attrs: {
-      "src": "//img.hb.aicdn.com/18acee7bb27e798c399f457b2548e7d436ecc0e552a9a-BIIObQ_fw236",
-      "width": "236",
-      "height": "153",
-      "alt": "♛Dimo采集到【黑与白】",
-      "data-baiduimageplus-ignore": "1"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "stop",
-    staticStyle: {
-      "display": "none"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "cover"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "convo attribution clearfix"
-  }, [_c('a', {
     staticClass: "img x",
     attrs: {
-      "href": "/lmkgjgj/",
-      "title": "♛Dimo",
-      "rel": "nofollow"
+      "href": "/lmkgjgj/"
     }
   }, [_c('img', {
     staticClass: "avt",
@@ -31853,68 +31818,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": "//img.hb.aicdn.com/c737c4dcb83d2c9025e9d9cbf54774618cbbecf2e675-V37AE2_sq75sf",
       "data-baiduimageplus-ignore": "1"
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('div', {
-    staticClass: "inner"
-  }, [_c('div', {
-    staticClass: "line"
-  }, [_c('a', {
-    staticClass: "author x",
-    attrs: {
-      "href": "/lmkgjgj/",
-      "rel": ""
-    }
-  }, [_vm._v("♛Dimo")]), _vm._v(" 采集到\n                ")]), _vm._v(" "), _c('div', {
-    staticClass: "line"
-  }, [_c('a', {
-    staticClass: "x",
-    attrs: {
-      "href": "/boards/34522230/",
-      "rel": ""
-    }
-  }, [_vm._v("【黑与白】")])]), _vm._v(" "), _c('a', {
-    staticClass: "replyButton",
-    attrs: {
-      "title": "评论"
-    }
-  })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "write convo clearfix",
-    staticStyle: {
-      "display": "none"
-    }
-  }, [_c('a', {
-    staticClass: "img x",
-    attrs: {
-      "href": "//",
-      "title": ""
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": "//img.hb.aicdn.com/654953460733026a7ef6e101404055627ad51784a95c-B6OFs4_sq75sf",
-      "data-baiduimageplus-ignore": "1"
-    }
-  })]), _vm._v(" "), _c('form', {
-    attrs: {
-      "action": "/pins/1272656784/comments/",
-      "method": "POST"
-    }
-  }, [_c('textarea', {
-    staticClass: "clear-input GridComment",
-    attrs: {
-      "placeholder": "添加评论或把采集@给好友"
-    }
-  }), _vm._v(" "), _c('a', {
-    staticClass: "grid_comment_button btn",
-    attrs: {
-      "href": "#",
-      "onclick": "return false;"
-    }
-  }, [_c('span', {
-    staticClass: "text"
-  }, [_vm._v(" 添加评论")])])])])
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -42082,42 +41986,91 @@ module.exports = function(module) {
 /***/ "./resources/assets/js/app.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 __webpack_require__("./resources/assets/js/bootstrap.js");
-
 window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 Vue.component('waterfall', __webpack_require__("./resources/assets/js/components/Waterfall.vue"));
 
 var app = new Vue({
     el: '#page',
     data: {
-        items: []
+        items: [],
+        top_five: []
     },
     mounted: function mounted() {
-        this.loadImages(0, 20);
+        var first_ele = { left_bottom: $('#waterfall').children('div').first().height(), left: 0 };
+        this.top_five.push(first_ele);
+        this.loadImages(0, 30);
     },
     methods: {
         loadImages: function loadImages(offset, limit) {
             var _this = this;
             var url = 'http://helloclick.app/load_images?offset=' + offset + '&limit=' + limit;
-            console.log(url);
             axios.get(url).then(function (response) {
-                _this.items = response.data;
+                _this.processPosition(response.data);
             }).catch(function (err) {
                 console.log(err);
             });
+        },
+        processPosition: function processPosition(items) {
+            var basement_left = $('#waterfall').children('div').last().position().left;
+            var basement_count = $('#waterfall').children('div').length;
+            var waterfall_width = $('#waterfall').width();
+
+            for (var i = 0; i < items.length; i++) {
+                // 计算出可以直接确定top=0的元素
+                var item = items[i];
+                // 计算图片整个容器高度
+                var height = item.width === 0 ? 0 : parseInt(item.height * 236 / item.width);
+                height += 103;
+
+                if (i < 5 - basement_count) {
+                    // top
+                    item.top = 0;
+                    if (basement_left + 252 > waterfall_width) {
+                        basement_left = 0;
+                    } else {
+                        basement_left += 252;
+                    }
+                    // left
+                    item.left = basement_left;
+                } else {
+                    var min_item = this.lowest;
+                    item.top = min_item.left_bottom + 16;
+                    item.left = min_item.left;
+                }
+
+                item.position = 'absolute';
+                item.left_bottom = item.top + height;
+
+                this.items.push(item);
+
+                // 保存最下边的5个
+                if (this.top_five.length < 5) {
+                    this.top_five.push(item);
+                } else {
+                    for (var _i = 0; _i < this.top_five.length; _i++) {
+                        if (item.left === this.top_five[_i].left && item.left_bottom > this.top_five[_i].left_bottom) {
+                            this.top_five.splice(_i, 1, item);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    },
+    computed: {
+        lowest: function lowest() {
+            var min_item = this.top_five[0];
+            for (var i = 0; i < this.top_five.length; i++) {
+                if (min_item.left_bottom > this.top_five[i].left_bottom) {
+                    min_item = this.top_five[i];
+                }
+            }
+
+            return min_item;
+        },
+        left: function left() {
+            return 0;
         }
     }
 });
@@ -42224,10 +42177,26 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/sass/main.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/assets/sass/self.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("./resources/assets/js/app.js");
+__webpack_require__("./resources/assets/js/app.js");
+__webpack_require__("./resources/assets/sass/main.scss");
+module.exports = __webpack_require__("./resources/assets/sass/self.scss");
 
 
 /***/ })
