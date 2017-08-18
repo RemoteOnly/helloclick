@@ -8,20 +8,40 @@ const app = new Vue({
         items: [],
         top_five: []
     },
+    props: {
+        url: ''
+    },
     mounted: function () {
         let first_ele = {left_bottom: $('#waterfall').children('div').first().height(), left: 0};
+        this.url = $('#page').data('url');
         this.top_five.push(first_ele);
         this.loadImages(0, 30);
     },
     methods: {
         loadImages: function (offset, limit) {
             let _this = this;
-            let url = 'http://helloclick.app/load_images?offset=' + offset + '&limit=' + limit;
+            let join_style = this.url.indexOf('?') === -1 ? '?' : '&';
+            let url = this.url + join_style + 'offset=' + offset + '&limit=' + limit;
+            // 提示
+            $('#loading-btn').hide();
+            $('#loading-info').show();
             axios.get(url).then(function (response) {
+                let last_count = $('#loading-btn').data('offset');
+                $('#loading-btn').data('offset', last_count + response.data.length);
                 _this.processPosition(response.data);
+
+                // 提示
+                $('#loading-btn').show();
+                $('#loading-info').hide();
             }).catch(function (err) {
-                console.log(err);
+                swal('', '请求失败，请刷新页面重试', 'warning');
+                $('#loading-btn').hide();
+                $('#loading-info').show();
             });
+        },
+        loadMore: function () {
+            let offset = $('#loading-btn').data('offset');
+            this.loadImages(offset, 30);
         },
         processPosition: function (items) {
             let basement_left = $('#waterfall').children('div').last().position().left;
@@ -29,12 +49,11 @@ const app = new Vue({
             let waterfall_width = $('#waterfall').width();
 
             for (let i = 0; i < items.length; i++) {
-                // 计算出可以直接确定top=0的元素
                 let item = items[i];
                 // 计算图片整个容器高度
                 let height = item.width === 0 ? 0 : parseInt(item.height * 236 / item.width);
                 height += 103;
-
+                // 计算出可以直接确定top=0的元素
                 if (i < 5 - basement_count) {
                     // top
                     item.top = 0;
@@ -43,13 +62,14 @@ const app = new Vue({
                     } else {
                         basement_left += 252;
                     }
-                    // left
+                    // eft
                     item.left = basement_left;
 
                 } else {
-                    let min_item = this.lowest;
-                    item.top = min_item.left_bottom + 16;
-                    item.left = min_item.left;
+                    // 从top_five中取到最高的一个元素，将新的item放在它的下边
+                    let highest_item = this.highest;
+                    item.top = highest_item.left_bottom + 16;
+                    item.left = highest_item.left;
                 }
 
                 item.position = 'absolute';
@@ -57,7 +77,7 @@ const app = new Vue({
 
                 this.items.push(item);
 
-                // 保存最下边的5个
+                // 更新最下边的5个div
                 if (this.top_five.length < 5) {
                     this.top_five.push(item);
                 } else {
@@ -69,18 +89,28 @@ const app = new Vue({
                     }
                 }
             }
+
+            // 修改container的高度
+            let lowest = this.top_five[0].left_bottom;
+            for (let i = 0; i < this.top_five.length; i++) {
+                if (lowest < this.top_five[i].left_bottom) {
+                    lowest = this.top_five[i].left_bottom;
+                }
+            }
+            $('#waterfall').height(lowest);
         }
     },
     computed: {
-        lowest: function () {
-            let min_item = this.top_five[0];
+        highest: function () {
+            // 在最下边的5个中查找最上边的一个
+            let highest_item = this.top_five[0];
             for (let i = 0; i < this.top_five.length; i++) {
-                if (min_item.left_bottom > this.top_five[i].left_bottom) {
-                    min_item = this.top_five[i];
+                if (highest_item.left_bottom > this.top_five[i].left_bottom) {
+                    highest_item = this.top_five[i];
                 }
             }
 
-            return min_item;
+            return highest_item;
         },
         left: function () {
             return 0;

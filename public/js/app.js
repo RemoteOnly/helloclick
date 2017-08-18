@@ -31745,16 +31745,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0), _vm._v(" "), _c('a', {
     staticClass: "img x layer-view loaded",
     attrs: {
-      "href": "/pins/1272656784/",
-      "target": "_self"
+      "href": '/show/' + _vm.item.id,
+      "target": "_blank"
     }
   }, [_c('div', {
     staticClass: "default-bg"
   }), _vm._v(" "), _c('img', {
     attrs: {
       "src": _vm.item.url,
-      "width": "236",
-      "data-baiduimageplus-ignore": "1"
+      "width": "236"
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "stop",
@@ -31767,7 +31766,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description"
   }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c('div', {
     staticClass: "convo attribution clearfix"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_c('a', {
+    staticClass: "img x",
+    attrs: {
+      "href": '/users/' + _vm.item.user.id,
+      "target": "_blank"
+    }
+  }, [_c('img', {
+    staticClass: "avt",
+    attrs: {
+      "src": _vm.item.user.photo
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "text"
   }, [_c('div', {
     staticClass: "inner"
@@ -31776,7 +31786,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('a', {
     staticClass: "author x",
     attrs: {
-      "href": _vm.item.user.photo
+      "href": '/users/' + _vm.item.user.id,
+      "target": "_blank"
     }
   }, [_vm._v("♛" + _vm._s(_vm.item.user.name))])]), _vm._v(" "), _c('div', {
     staticClass: "line"
@@ -31784,7 +31795,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('a', {
       staticClass: "tag",
       attrs: {
-        "href": "/boards/34522230/"
+        "href": '/tags/' + tag.slug,
+        "target": "_blank"
       }
     }, [_vm._v(_vm._s(tag.name))])
   }))])])])])
@@ -31806,19 +31818,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('span', {
     staticClass: "text"
   })])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "img x",
-    attrs: {
-      "href": "/lmkgjgj/"
-    }
-  }, [_c('img', {
-    staticClass: "avt",
-    attrs: {
-      "src": "//img.hb.aicdn.com/c737c4dcb83d2c9025e9d9cbf54774618cbbecf2e675-V37AE2_sq75sf",
-      "data-baiduimageplus-ignore": "1"
-    }
-  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -41996,20 +41995,40 @@ var app = new Vue({
         items: [],
         top_five: []
     },
+    props: {
+        url: ''
+    },
     mounted: function mounted() {
         var first_ele = { left_bottom: $('#waterfall').children('div').first().height(), left: 0 };
+        this.url = $('#page').data('url');
         this.top_five.push(first_ele);
         this.loadImages(0, 30);
     },
     methods: {
         loadImages: function loadImages(offset, limit) {
             var _this = this;
-            var url = 'http://helloclick.app/load_images?offset=' + offset + '&limit=' + limit;
+            var join_style = this.url.indexOf('?') === -1 ? '?' : '&';
+            var url = this.url + join_style + 'offset=' + offset + '&limit=' + limit;
+            // 提示
+            $('#loading-btn').hide();
+            $('#loading-info').show();
             axios.get(url).then(function (response) {
+                var last_count = $('#loading-btn').data('offset');
+                $('#loading-btn').data('offset', last_count + response.data.length);
                 _this.processPosition(response.data);
+
+                // 提示
+                $('#loading-btn').show();
+                $('#loading-info').hide();
             }).catch(function (err) {
-                console.log(err);
+                swal('', '请求失败，请刷新页面重试', 'warning');
+                $('#loading-btn').hide();
+                $('#loading-info').show();
             });
+        },
+        loadMore: function loadMore() {
+            var offset = $('#loading-btn').data('offset');
+            this.loadImages(offset, 30);
         },
         processPosition: function processPosition(items) {
             var basement_left = $('#waterfall').children('div').last().position().left;
@@ -42017,12 +42036,11 @@ var app = new Vue({
             var waterfall_width = $('#waterfall').width();
 
             for (var i = 0; i < items.length; i++) {
-                // 计算出可以直接确定top=0的元素
                 var item = items[i];
                 // 计算图片整个容器高度
                 var height = item.width === 0 ? 0 : parseInt(item.height * 236 / item.width);
                 height += 103;
-
+                // 计算出可以直接确定top=0的元素
                 if (i < 5 - basement_count) {
                     // top
                     item.top = 0;
@@ -42031,12 +42049,13 @@ var app = new Vue({
                     } else {
                         basement_left += 252;
                     }
-                    // left
+                    // eft
                     item.left = basement_left;
                 } else {
-                    var min_item = this.lowest;
-                    item.top = min_item.left_bottom + 16;
-                    item.left = min_item.left;
+                    // 从top_five中取到最高的一个元素，将新的item放在它的下边
+                    var highest_item = this.highest;
+                    item.top = highest_item.left_bottom + 16;
+                    item.left = highest_item.left;
                 }
 
                 item.position = 'absolute';
@@ -42044,7 +42063,7 @@ var app = new Vue({
 
                 this.items.push(item);
 
-                // 保存最下边的5个
+                // 更新最下边的5个div
                 if (this.top_five.length < 5) {
                     this.top_five.push(item);
                 } else {
@@ -42056,18 +42075,28 @@ var app = new Vue({
                     }
                 }
             }
+
+            // 修改container的高度
+            var lowest = this.top_five[0].left_bottom;
+            for (var _i2 = 0; _i2 < this.top_five.length; _i2++) {
+                if (lowest < this.top_five[_i2].left_bottom) {
+                    lowest = this.top_five[_i2].left_bottom;
+                }
+            }
+            $('#waterfall').height(lowest);
         }
     },
     computed: {
-        lowest: function lowest() {
-            var min_item = this.top_five[0];
+        highest: function highest() {
+            // 在最下边的5个中查找最上边的一个
+            var highest_item = this.top_five[0];
             for (var i = 0; i < this.top_five.length; i++) {
-                if (min_item.left_bottom > this.top_five[i].left_bottom) {
-                    min_item = this.top_five[i];
+                if (highest_item.left_bottom > this.top_five[i].left_bottom) {
+                    highest_item = this.top_five[i];
                 }
             }
 
-            return min_item;
+            return highest_item;
         },
         left: function left() {
             return 0;

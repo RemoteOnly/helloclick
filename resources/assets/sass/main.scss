@@ -1662,7 +1662,7 @@ textarea.clear-input {
 
 #waterfall {
   position: relative;
-  min-height: 500px;
+  //min-height: 500px;
   margin: 16px auto 0
 }
 
@@ -13339,7 +13339,7 @@ h1#thin_logo {
 
 .pin-view .board-piece .board-pins {
   margin-bottom: 10px;
-  height: 360px;
+  height: 270px;
   width: 272px;
   overflow-y: auto;
   overflow-x: hidden
@@ -13375,7 +13375,7 @@ h1#thin_logo {
 
 #board_pins_waterfall {
   position: relative;
-  min-height: 380px
+  min-height: 290px
 }
 
 .pin-view .board-piece .board-pins .loading {
@@ -13437,7 +13437,8 @@ h1#thin_logo {
 }
 
 .pin-view .siblings-piece .inner img.space {
-  margin-right: 2px
+  margin-right: 2px;
+  margin-bottom: 2px;
 }
 
 .pin-view .siblings-piece .inner .arrow {

@@ -1,11 +1,12 @@
 <div id="header" class="" style="left: 0px;">
-    <div class="wrapper" style="width:@if(Route::is('index')) 1244px @else 992px @endif">
+    <div class="wrapper" style="width:@if(Route::is('show')) 992px @else 1244px @endif">
         <div class="menu-bar">
             <div class="left-part">
                 <a id="huaban" href="/"></a>
                 @foreach($banners as $key => $banner)
                     @break($key > 6)
-                    <a href="http://meia.me" target="_blank" class="header-item">{{ $banner->name }}</a>
+                    <a href="{{ route('show_tagged_images',['slug'=>$banner->slug]) }}"
+                       class="header-item">{{ $banner->name }}</a>
                 @endforeach
                 <div class="menu-nav">
                     <div class="header-main-menu" style="display: none">
@@ -16,16 +17,17 @@
                             @foreach($banners->slice(7)->chunk(5) as $col_num => $group)
                                 <div class="col-{{$col_num + 1}} col">
                                     @foreach($group as $item)
-                                        <a href="#" class="category-link">{{ $item->name }}</a>
+                                        <a href="{{ route('show_tagged_images',['slug'=>$item->slug]) }}"
+                                           class="category-link">{{ $item->name }}</a>
                                     @endforeach
                                 </div>
                             @endforeach
                         </div>
                         <div class="bottom-module clearfix">
                             <div class="links">
-                                <a href="/about/" rel="nofollow">关于</a><span>·</span>
-                                <a href="/pins/53553/" rel="nofollow">反馈</a><span>·</span>
-                                <a href="http://blog.huaban.com/" rel="nofollow" style="margin-right: 0;">博客</a>
+                                <a href="javascript:void(0);" rel="nofollow">关于</a><span>·</span>
+                                <a href="javascript:void(0);" rel="nofollow">反馈</a><span>·</span>
+                                <a href="javascript:void(0);" rel="nofollow" style="margin-right: 0;">博客</a>
                             </div>
                             <div class="up-arrow"></div>
                         </div>
@@ -72,18 +74,14 @@
                             <div class="num hidden">0</div>
                         </a>
                         <div class="menu" style="display: none;">
-                            <div class="group"><a href="/old-rock/">我的花瓣<i class="mine"></i></a>
+                            <div class="group"><a
+                                        href="{{ route('user.index',['user_id'=>Auth::id()]) }}">我的HelloClick<i
+                                            class="mine"></i></a>
                                 <a title="私信" onclick="app.page.dmController.openFreshList();" class="dm-nav">
                                     私信<i class="messages"></i>
                                     <div class="num in-line hidden">0</div>
                                 </a>
                                 <a href="/old-rock/following/">我的关注<i class="following"></i></a>
-                            </div>
-                            <div class="group">
-                                <a href="/friends/weibo/">查找好友<i class="friends"></i></a>
-                            </div>
-                            <div class="group">
-                                <a href="/muse/register/">花瓣认证设计师<i class="verified"></i></a>
                             </div>
                             <div class="group">
                                 <a href="/settings/">帐号设置<i class="settings"></i></a>

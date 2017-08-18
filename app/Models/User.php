@@ -38,4 +38,35 @@ class User extends Authenticatable
         return $this->where('email_confirmed', 'no');
     }
     //endregion
+
+    //region 关联关系
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'user_tag', 'tag_id', 'user_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function favors()
+    {
+        return $this->belongsToMany(User::class, 'favors', 'photographer_id', 'user_id');
+    }
+
+    // 有多少粉丝
+    public function fans()
+    {
+        return $this->belongsToMany(User::class, 'followings', 'photographer_id', 'user_id')
+            ->withPivot(['user_id', 'photographer_id']);
+    }
+
+    // 关注了谁
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followings', 'user_id', 'photographer_id')
+            ->withPivot(['user_id', 'photographer_id']);
+    }
+    //endregion
 }

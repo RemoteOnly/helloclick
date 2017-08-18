@@ -5,7 +5,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class ImagesTableSeeder extends Seeder
+class ImaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class ImagesTableSeeder extends Seeder
 
         $tag_ids = Tag::pluck('id')->toArray();
 
-        $images = factory(Image::class)->times(30)->create();
+        $images = factory(Image::class)->times(100)->create();
 
         $image_tag = [];
         foreach ($images as $image) {

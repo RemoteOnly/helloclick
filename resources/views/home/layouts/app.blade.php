@@ -20,7 +20,7 @@
     @show
 </head>
 <body>
-<div id="page" class="page-min-width page-with-header" style="display: block;" url="{{ route('load_images') }}">
+<div id="page" class="page-min-width page-with-header" style="display: block;" data-url="{{ $load_images_url or ''}}">
     @include('home.layouts._header')
 
     @section('content')
@@ -38,9 +38,12 @@
 <!-- Scripts -->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    window.CSRF_TOKEN = "{{ csrf_token() }}";
-    $.ajaxSetup({
-        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     });
 </script>
 

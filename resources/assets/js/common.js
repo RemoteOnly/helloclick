@@ -261,6 +261,11 @@ $('#to-reset-password').click(function () {
     })
 });
 
+// 滚动顶端
+$('#elevator').click(function () {
+    $('html,body').animate({scrollTop: '0px'}, 800);
+});
+
 //endregion
 
 //region Functions
