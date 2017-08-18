@@ -14,6 +14,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -28,9 +29,13 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
 $factory->define(\App\Models\Image::class, function (\Faker\Generator $faker) {
     $user_ids = User::pluck('id')->toArray();
+    $sizes = ['640', '480', '320', '240'];
+    $selected = Arr::random($sizes, 2);
     return [
         'name' => $faker->name,
-        'url' => $faker->imageUrl(),
+        'url' => $faker->imageUrl($selected[0], $selected[1]),
+        'width' => $selected[0],
+        'height' => $selected[1],
         'user_id' => array_first(array_random($user_ids, 1)),
         'description' => $faker->paragraph
     ];

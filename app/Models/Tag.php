@@ -23,7 +23,12 @@ class Tag extends Model
     //region 关联关系
     public function images()
     {
-        return $this->belongsToMany(Image::class, 'tag_id', 'images_id');
+        return $this->belongsToMany(Image::class, 'image_tag', 'image_id', 'tag_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_tag', 'user_id', 'tag_id');
     }
     //endregion
 }

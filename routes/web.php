@@ -13,10 +13,18 @@
 
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/load_images', 'HomeController@loadImages')->name('load_images');
-Route::get('/show', 'HomeController@show')->name('show');
-Route::get('/settings', 'UserController@index')->name('settings');
+Route::get('/tags/{slug}', 'HomeController@showTaggedImages')->name('show_tagged_images');
+// index 和 show_tagged_image两个页面中加载图片的方法
+Route::get('/show/{image_id}', 'HomeController@show')->name('show');
 
+// Image 的去读上传
+Route::get('/load_images', 'ImageController@loadImages')->name('load_images');
+
+// User
+Route::get('/users/{id}', 'UserController@index')->name('user.index');
+Route::get('/followings', 'UserController@followings')->name('user.followings');
+
+Route::get('/settings', 'UserController@settings')->name('settings');
 
 Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {
     // 登录退出

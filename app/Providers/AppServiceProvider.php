@@ -19,7 +19,12 @@ class AppServiceProvider extends ServiceProvider
         $banners = Cache::rememberForever('banners', function () {
             return Tag::banners()->get();
         });
+        $favorites = Cache::remember('favorites', 24 * 60, function () {
+            $favorites = Tag::favorite()->get();
+            return $favorites;
+        });
         view()->share('banners', $banners);
+        view()->share('favorites', $favorites);
     }
 
     /**

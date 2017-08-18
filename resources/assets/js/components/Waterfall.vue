@@ -10,26 +10,26 @@
                 </a>
             </div>
         </div>
-        <a href="/pins/1272656784/" target="_self" class="img x layer-view loaded">
+        <a :href="'/show/' + item.id" target="_blank" class="img x layer-view loaded">
             <div class="default-bg"></div>
-            <img :src="item.url" width="236" data-baiduimageplus-ignore="1">
+            <img :src="item.url" width="236">
             <span style="display: none" class="stop"></span>
             <div class="cover">
             </div>
         </a>
         <p class="description">{{ item.name }}</p>
         <div class="convo attribution clearfix">
-            <a href="/lmkgjgj/" class="img x">
-                <img src="//img.hb.aicdn.com/c737c4dcb83d2c9025e9d9cbf54774618cbbecf2e675-V37AE2_sq75sf"
-                     data-baiduimageplus-ignore="1" class="avt">
+            <a :href="'/users/' + item.user.id" class="img x" target="_blank">
+                <img :src="item.user.photo" class="avt">
             </a>
             <div class="text">
                 <div class="inner">
                     <div class="line">
-                        <a :href="item.user.photo" class="author x">♛{{ item.user.name }}</a>
+                        <a :href="'/users/' + item.user.id" class="author x" target="_blank">♛{{ item.user.name }}</a>
                     </div>
                     <div class="line">
-                        <a href="/boards/34522230/" class="tag" v-for="tag in item.tags">{{ tag.name }}</a>
+                        <a :href="'/tags/' + tag.slug" class="tag" v-for="tag in item.tags" target="_blank">{{ tag.name
+                            }}</a>
                     </div>
                 </div>
             </div>
