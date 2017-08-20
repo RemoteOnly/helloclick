@@ -22,9 +22,22 @@ Route::get('/load_images', 'ImageController@loadImages')->name('load_images');
 
 // User
 Route::get('/users/{id}', 'UserController@index')->name('user.index');
-Route::get('/followings', 'UserController@followings')->name('user.followings');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/followings', 'UserController@followings')->name('user.followings');
+    Route::delete('/followings/{user_id}', 'UserController@cancelFollowing')->name('user.cancel_following');
+    Route::get('/favors', 'UserController@showFavors')->name('user.show_favors');
+    Route::post('/favor', 'UserController@favor')->name('user.favor');
+    // profile
+    Route::get('/settings', 'UserController@settings')->name('user.settings');
 
-Route::get('/settings', 'UserController@settings')->name('settings');
+    // comment
+    Route::post('/comments', 'CommentController@store')->name('comment.store');
+    Route::delete('/comments/{comment_id}', 'CommentController@destroy')->name('common.destroy');
+
+
+
+});
+
 
 Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {
     // 登录退出

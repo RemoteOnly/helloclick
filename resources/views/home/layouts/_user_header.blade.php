@@ -4,8 +4,9 @@
     <div class="inner clearfix ">
         <div class="avatar-unit">
             <div class="img">
-                <img src="{{ $user->photo }}" class="current-avatar">
-                <img src="/img/load2.gif" style="display:none;" class="load">
+                <a href="{{ route('user.index',['user_id'=>$user->id]) }}">
+                    <img src="{{ $user->photo }}" class="current-avatar">
+                </a>
             </div>
             <div class="counts clearfix">
                 <a href="javascript:void(0);" class="followers">
@@ -19,7 +20,9 @@
             </div>
         </div>
         <div class="head-line">
-            <div class="name">{{ $user->name }}</div>
+            <div class="name">
+                <a href="{{ route('user.index',['user_id'=>$user->id]) }}">{{ $user->name }}</a>
+            </div>
             <div class="muse medal-info verified">
                 <div class="content">
                     <div class="cc">
@@ -34,22 +37,14 @@
         <ul class="introduction">
             <li>
                 <i id="intro_sex_woman"></i>
-                <em>女</em>
-            </li>
-            <li>
-                <i id="intro_location"></i>
-                <em>来自浙江 杭州</em>
+                <em>{{ $user->sex }}</em>
             </li>
             <li>
                 <i id="intro_horoscope"></i>
-                <em>巨蟹座</em>
-            </li>
-            <li>
-                <i id="intro_job"></i>
-                <em>摄影师</em>
+                <em>{{ $user->star_sign }}</em>
             </li>
         </ul>
-        <div class="about clearfix">about</div>
+        <div class="about clearfix">{{ $user->description }}</div>
         <div class="action-buttons">
             @if(Auth::id() != $user->id)
                 @if($has_followed == true)

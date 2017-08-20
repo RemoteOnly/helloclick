@@ -67,7 +67,8 @@
                 </div>
             </div>
 
-            <waterfall v-for="item in items" :item='item' :key="item.id" :data-index="item.id"></waterfall>
+            <waterfall v-for="item in items" :data-url="url" :item='item' :key="item.id"
+                       :data-index="item.id"></waterfall>
         </div>
         <div class="loading" style="display: block;">
             <span id="loading-btn" data-offset="0" @click="loadMore">加载更多</span>

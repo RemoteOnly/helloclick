@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'photo'
+        'name', 'email', 'password', 'photo', 'star_sign', 'description', 'sex'
     ];
 
     /**
@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function favors()
     {
-        return $this->belongsToMany(User::class, 'favors', 'photographer_id', 'user_id');
+        return $this->belongsToMany(Image::class, 'favors', 'user_id', 'image_id');
     }
 
     // 有多少粉丝

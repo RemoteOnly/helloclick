@@ -20,7 +20,10 @@
     @show
 </head>
 <body>
-<div id="page" class="page-min-width page-with-header" style="display: block;" data-url="{{ $load_images_url or ''}}">
+<div id="page" class="page-min-width page-with-header"
+     style="display: block;"
+     data-url="{{ $load_images_url or ''}}"
+     data-target-type="{{ $target_type or '_blank' }}">
     @include('home.layouts._header')
 
     @section('content')

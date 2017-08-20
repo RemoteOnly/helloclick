@@ -36,7 +36,12 @@
                 </div>
             </div>
 
-            <waterfall v-for="item in items" :item='item' :key="item.id" :data-index="item.id"></waterfall>
+            <waterfall v-for="item in items"
+                       :item='item'
+                       :key="item.id"
+                       :data-index="item.id"
+                       :target_type="target_type">
+            </waterfall>
         </div>
         <div class="loading" style="display: block;">
             <span id="loading-btn" data-offset="0" @click="loadMore">...</span>

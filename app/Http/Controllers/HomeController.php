@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Tag;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -46,14 +48,26 @@ class HomeController extends Controller
     public function show(Request $request, $image_id = null)
     {
         $image = Image::with(['user', 'tags'])->find($image_id);
+        if (!$image) {
+            flash()->message('未找到图片', 'warning');
+            return redirect()->route('index');
+        }
+        // 更新查看次数
+        $image->view_count++;
+        $image->save();
+
+        // 随机获取6张推荐图片
         $new_images = Image::where('user_id', $image->user_id)
             ->inRandomOrder()
             ->limit(6)
             ->get();
 
-        return view('home.index.show', compact('image', 'new_images'));
-    }
+        $comments = Comment::with(['user'])->where('image_id', $image->id)
+            ->orderBy('created_at')
+            ->get();
 
+        return view('home.index.show', compact('image', 'new_images', 'comments'));
+    }
 
     public function showTaggedImages(Request $request, $slug = null)
     {
@@ -76,6 +90,7 @@ class HomeController extends Controller
             ->get();
 
         $load_images_url = URL::route('load_images', ['slug' => $slug]);
-        return view('home.index.index', compact('load_images_url', 'recommended_users'));
+        $target_type = '_self';
+        return view('home.index.index', compact('load_images_url', 'recommended_users', 'target_type'));
     }
 }

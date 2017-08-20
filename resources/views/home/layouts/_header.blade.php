@@ -66,25 +66,28 @@
                     </div>
                     <div id="nav_user">
                         <a href="/old-rock/" class="nav-link dm-nav">
-                            <img width="26" height="26"
-                                 src="//hbimg.b0.upaiyun.com/fd8de693a44696557283eb2f1cf76dcc34e3c7921471-0o9FnR_sq75sf"
-                                 data-baiduimageplus-ignore="1"
-                                 class="avt">
+                            <img width="26" height="26" src="{{ Auth::user()->photo }}" class="avt">
                             <div class="arrow"></div>
                             <div class="num hidden">0</div>
                         </a>
                         <div class="menu" style="display: none;">
-                            <div class="group"><a
-                                        href="{{ route('user.index',['user_id'=>Auth::id()]) }}">我的HelloClick<i
-                                            class="mine"></i></a>
+                            <div class="group">
+                                <a href="{{ route('user.index',['user_id'=>Auth::id()]) }}">我的主页
+                                    <i class="mine"></i>
+                                </a>
                                 <a title="私信" onclick="app.page.dmController.openFreshList();" class="dm-nav">
                                     私信<i class="messages"></i>
                                     <div class="num in-line hidden">0</div>
                                 </a>
-                                <a href="/old-rock/following/">我的关注<i class="following"></i></a>
+                                <a href="{{ route('user.show_favors') }}">
+                                    我的喜欢<i class="shiji"></i>
+                                </a>
+                                <a href="{{ route('user.followings') }}">
+                                    我的关注<i class="following"></i>
+                                </a>
                             </div>
                             <div class="group">
-                                <a href="/settings/">帐号设置<i class="settings"></i></a>
+                                <a href="{{ route('user.settings') }}">帐号设置<i class="settings"></i></a>
                                 <a href="/logout/">退出<i class="exit"></i></a>
                             </div>
                         </div>
