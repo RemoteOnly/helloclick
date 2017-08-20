@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(ImagesTableSeeder::class);
         //$this->call(UserTagTableSeeder::class);
         //$this->call(EchoSeed::class);
-        $this->call(FollowingsTableSeeder::class);
+        //$this->call(FollowingsTableSeeder::class);
+        // $this->call(FavorsTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
     }
 }

@@ -1659,15 +1659,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     // 属性，对外开放接口
-    props: {
-        item: {}
-    },
+    props: ['item', 'url', 'target_type'],
     mounted: function mounted() {},
 
-    methods: {},
+    methods: {
+        favor: function favor(image_id) {
+            if ($('#nav_user').length < 1) {
+                // 未登录
+                $('.login.btn.wbtn').click();
+                return false;
+            }
+            var _this = this;
+
+            axios.post('/favor', {
+                image_id: image_id
+            }).then(function (response) {
+                // 喜欢或者不喜欢
+                if (response.data.status === 1) {
+
+                    if (response.data.favor_status === 1) {
+                        _this.item.favor_count++;
+                        $('#favor-' + image_id).removeClass('like').addClass('unlike');
+                    } else {
+                        if (_this.item.favor_count < 1) {
+                            _this.item.favor_count = 0;
+                        } else {
+                            _this.item.favor_count--;
+                        }
+                        $('#favor-' + image_id).removeClass('unlike').addClass('like');
+                    }
+                } else {
+                    swal('', '请求出错，请刷新页面重试', 'warning');
+                }
+            }).catch(function (err) {
+                if (err.response.status === 401) {
+                    // 未登录
+                    $('.login.btn.wbtn').click();
+                    return false;
+                }
+
+                swal('', '请求出错，请刷新页面重试', 'error');
+            });
+        }
+    },
     computed: {}
 });
 
@@ -31742,7 +31789,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "left_bottom": _vm.item.left_bottom
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_c('div', {
+    staticClass: "actions"
+  }, [_c('div', {
+    staticClass: "right"
+  }, [_c('a', {
+    class: _vm.item.has_favored == 1 ? 'unlike btn-with-icon btn btn14' : 'like btn-with-icon btn btn14',
+    attrs: {
+      "title": "喜欢",
+      "href": "javascript:void(0);",
+      "id": 'favor-' + _vm.item.id
+    }
+  }, [_c('i', {
+    staticClass: "heart",
+    on: {
+      "click": function($event) {
+        _vm.favor(_vm.item.id)
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.item.favor_count))])])])]), _vm._v(" "), _c('a', {
     staticClass: "img x layer-view loaded",
     attrs: {
       "href": '/show/' + _vm.item.id,
@@ -31764,7 +31831,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "cover"
   })]), _vm._v(" "), _c('p', {
     staticClass: "description"
-  }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c('p', {
+    staticClass: "stats less"
+  }, [_c('span', {
+    staticClass: "repin",
+    attrs: {
+      "title": "浏览"
+    }
+  }, [_c('i'), _vm._v(_vm._s(_vm.item.view_count) + "\n        ")]), _vm._v(" "), _c('span', {
+    staticClass: "like",
+    attrs: {
+      "title": "喜欢"
+    }
+  }, [_c('i'), _vm._v(_vm._s(_vm.item.favor_count) + "\n        ")])]), _vm._v(" "), _c('div', {
     staticClass: "convo attribution clearfix"
   }, [_c('a', {
     staticClass: "img x",
@@ -31796,29 +31875,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "tag",
       attrs: {
         "href": '/tags/' + tag.slug,
-        "target": "_blank"
+        "target": _vm.target_type
       }
-    }, [_vm._v(_vm._s(tag.name))])
+    }, [_vm._v("\n                        " + _vm._s(tag.name) + "\n                    ")])
   }))])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "actions"
-  }, [_c('div', {
-    staticClass: "right"
-  }, [_c('a', {
-    staticClass: "like btn-with-icon btn btn14",
-    attrs: {
-      "data-id": "1272656784",
-      "title": "喜欢",
-      "href": "#",
-      "onclick": "return false;"
-    }
-  }, [_c('i', {
-    staticClass: "heart"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "text"
-  })])])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -41993,14 +42054,14 @@ var app = new Vue({
     el: '#page',
     data: {
         items: [],
-        top_five: []
-    },
-    props: {
-        url: ''
+        top_five: [],
+        url: '',
+        target_type: ''
     },
     mounted: function mounted() {
         var first_ele = { left_bottom: $('#waterfall').children('div').first().height(), left: 0 };
         this.url = $('#page').data('url');
+        this.target_type = $('#page').data('target-type');
         this.top_five.push(first_ele);
         this.loadImages(0, 30);
     },
@@ -42026,10 +42087,12 @@ var app = new Vue({
                 $('#loading-info').show();
             });
         },
+
         loadMore: function loadMore() {
             var offset = $('#loading-btn').data('offset');
             this.loadImages(offset, 30);
         },
+
         processPosition: function processPosition(items) {
             var basement_left = $('#waterfall').children('div').last().position().left;
             var basement_count = $('#waterfall').children('div').length;
@@ -42039,7 +42102,7 @@ var app = new Vue({
                 var item = items[i];
                 // 计算图片整个容器高度
                 var height = item.width === 0 ? 0 : parseInt(item.height * 236 / item.width);
-                height += 103;
+                height += 129;
                 // 计算出可以直接确定top=0的元素
                 if (i < 5 - basement_count) {
                     // top
@@ -42086,6 +42149,7 @@ var app = new Vue({
             $('#waterfall').height(lowest);
         }
     },
+
     computed: {
         highest: function highest() {
             // 在最下边的5个中查找最上边的一个
@@ -42098,6 +42162,7 @@ var app = new Vue({
 
             return highest_item;
         },
+
         left: function left() {
             return 0;
         }

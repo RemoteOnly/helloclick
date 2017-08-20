@@ -11,6 +11,14 @@ class EchoSeed extends Seeder
      */
     public function run()
     {
-        dd(\Illuminate\Support\Facades\Hash::make('666666'));
+        $image_ids = DB::table('favors')
+            ->where('user_id', 11)
+            ->orderBy('created_at')
+            ->offset(4)
+            ->limit(4)
+            ->get(['image_id']);
+
+        $image_ids = $image_ids->pluck('image_id')->toArray();
+        dd($image_ids);
     }
 }

@@ -20,6 +20,12 @@ class Image extends Model
     {
         return $this->belongsTo(User::class)->select(['id', 'name', 'photo']);
     }
+
+    public function favoredByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favors', 'image_id', 'user_id');
+    }
+
     //endregion
 
     //region Scopes

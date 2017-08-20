@@ -9,29 +9,65 @@
                         <div class="tool-bar"></div>
                         <div class="main-image">
                             <div id="baidu_image_holder" class="image-holder">
-                                <img src="{{ $image->url }}" width="600" height="400">
+                                <img src="{{ $image->url }}" width="600" height="400" id="current-image"
+                                     data-image-id="{{ $image->id }}">
                             </div>
                         </div>
                         <div class="tool-bar-bottom">
+                            <a href="#" onclick="return false;" class="btn-with-icon btn">
+                                <i class="class"></i>
+                                <span class="text"> 查看 <span class="num">{{ $image->view_count }}</span></span>
+                            </a>
                             <a href="#" onclick="return false;" class="like-btn btn-with-icon btn">
                                 <i class="class"></i>
-                                <span class="text"> 喜欢 <span class="num"></span></span>
+                                <span class="text"> 喜欢 <span class="num">{{ $image->favor_count }}</span></span>
                             </a>
-                            <a href="#" onclick="return false;" class="comment-btn btn-with-icon btn">
+                            <a href="javascript:void(0);" class="comment-btn btn-with-icon btn">
                                 <i class="class"></i>
-                                <span class="text"> 评论 <span class="num"></span>  </span>
+                                <span class="text"> 评论
+                                    <span class="num" id="comment-count">{{ $image->comment_count }}</span>  </span>
                             </a>
                         </div>
                         <div class="extra-box"></div>
                     </div>
                     <div class="info-piece piece">
-                        <div class="comments"></div>
+                        <div class="comments">
+                            @foreach($comments as $comment)
+                                <div class="comment" style="background-color: transparent;">
+                                    <a href=" " class="img x">
+                                        <img src="{{ $comment->user->photo }}" class="avatar"></a>
+                                    <div class="meta">
+                                        <a href="{{ route('user.index',['id'=>$comment->user->id]) }}"
+                                           class="author">{{ $comment->user->name }}</a>&nbsp;-&nbsp;
+                                        <span class="ts-words">{{ $comment->created_at->diffForHumans() }}</span>说：
+                                    </div>
+                                    <div class="text">
+                                        {!!  $comment->content !!}
+                                    </div>
+                                    <div class="action-buttons">
+                                        <a data-at-user-id="{{ $comment->user->id }}"
+                                           data-at-user-name="{{ $comment->user->name }}"
+                                           title="回复"
+                                           class="reply-button"></a>
+                                        @if(Auth::check() && Auth::id() == $comment->user->id)
+                                            <a data-comment-id="{{ $comment->id }}" title="删除" class="delete"></a>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                         <div id="pin_view_add_comment" class="clearfix">
-                            <a href="//" title="" class="img x">
-                                <img src="/img/annoymous.png" class="avatar">
+                            <a href="javascript:void(0);" title="" class="img x">
+                                @if(Auth::check())
+                                    <img src="{{ Auth::user()->photo }}" class="avatar">
+                                @else
+                                    <img src="/img/annoymous.png" class="avatar">
+                                @endif
                             </a>
-                            <textarea name="caption" placeholder="添加评论" class="clear-input"></textarea>
-                            <a href="#" onclick="return false;" class="post disabled btn btn14">
+                            <textarea name="caption" placeholder="添加评论..." class="clear-input"
+                                      id="comment-content"></textarea>
+                            <a href="#" onclick="return false;" class="btn btn14" id="add-comment"
+                               data-image-id="{{ $image->id }}">
                                 <span class="text"> 添加评论</span>
                             </a>
                         </div>
@@ -46,7 +82,7 @@
                             </a>
                             <a href="{{ route('user.index',['user_id'=>$image->user_id]) }}" target="_blank"
                                class="name x">{{ $image->user->name }}</a>
-                            <div class="sub">发布于{{ $image->created_at->diffForHumans() }}</div>
+                            <div class="sub">发布于 {{ $image->created_at->diffForHumans() }}</div>
                         </div>
                         <div class="board-pins cst-scrollbar">
                             <div id="board_pins_waterfall" class="description">

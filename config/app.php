@@ -189,6 +189,9 @@ return [
         // Language
         Overtrue\LaravelLang\TranslationServiceProvider::class,
 
+        // Purifier
+        Mews\Purifier\PurifierServiceProvider::class,
+
     ],
 
     /*
@@ -243,6 +246,9 @@ return [
 
         // Socialite
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        // Purifier
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ],
 
 ];

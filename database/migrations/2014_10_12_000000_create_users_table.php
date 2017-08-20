@@ -22,9 +22,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('email_confirmed', ['yes', 'no'])->default('no')->comment('是否经过邮箱验证');
             $table->string('photo')->nullable();
-
+            $table->string('star_sign')->nullable()->comment('星座');
+            $table->enum('sex', array('男', '女'))->default('男');
             $table->enum('type', ['common', 'photographer'])->default('common')
                 ->comment('comment-普通用户，只能浏览 photographer-摄影师');
+            $table->string('description')->nullable()->comment('自我介绍');
 
             $table->softDeletes()->comment('用来禁用用户');
             $table->rememberToken();
