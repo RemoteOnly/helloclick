@@ -1,7 +1,7 @@
 @extends('home.layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/settings.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/settings.css',true) }}">
 @endsection
 @section('content')
     <div class="wrapper settings-page">
