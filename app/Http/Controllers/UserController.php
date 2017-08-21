@@ -85,6 +85,20 @@ class UserController extends Controller
         return response()->json($message);
     }
 
+    public function toggleFollowing(Request $request, $user_id)
+    {
+        $changes = Auth::user()->followings()->toggle($user_id);
+        if (count($changes['detached']) > 0) {
+            $message = ['status' => 1, 'message' => '取消关注成功'];
+        } elseif (count($changes['attached']) > 0) {
+            $message = ['status' => 1, 'message' => '关注成功'];
+        } else {
+            $message = ['status' => 0, 'message' => '操作失败，请稍候重试'];
+        }
+
+        return response()->json($message);
+    }
+
     public function showFavors(Request $request)
     {
         $user = User::with('tags')
@@ -152,7 +166,9 @@ class UserController extends Controller
 
     public function settings()
     {
-        return view('home.user.settings');
+        $user = Auth::user();
+
+        return view('home.user.settings', compact('user'));
     }
 
 

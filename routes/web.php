@@ -24,7 +24,7 @@ Route::get('/load_images', 'ImageController@loadImages')->name('load_images');
 Route::get('/users/{id}', 'UserController@index')->name('user.index');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/followings', 'UserController@followings')->name('user.followings');
-    Route::delete('/followings/{user_id}', 'UserController@cancelFollowing')->name('user.cancel_following');
+    Route::post('/followings/{user_id}', 'UserController@toggleFollowing')->name('user.toggle_following');
     Route::get('/favors', 'UserController@showFavors')->name('user.show_favors');
     Route::post('/favor', 'UserController@favor')->name('user.favor');
     // profile
@@ -33,9 +33,6 @@ Route::group(['middleware' => 'auth'], function () {
     // comment
     Route::post('/comments', 'CommentController@store')->name('comment.store');
     Route::delete('/comments/{comment_id}', 'CommentController@destroy')->name('common.destroy');
-
-
-
 });
 
 

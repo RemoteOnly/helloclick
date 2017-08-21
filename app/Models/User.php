@@ -27,6 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected static $sexes = ['男', '女'];
+    protected static $star_signs = [
+        '水瓶座', '双鱼座', '白羊座', '金牛座',
+        '双子座', '巨蟹座', '狮子座', '处女座',
+        '天秤座', '天蝎座', '射手座', '魔羯座'
+    ];
+
     //region Scopes
     public function scopeEmailConfirmed()
     {
@@ -67,6 +74,30 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followings', 'user_id', 'photographer_id')
             ->withPivot(['user_id', 'photographer_id']);
+    }
+    //endregion
+
+    //region Helpers
+    public function radioSex($sex = null)
+    {
+        if ($sex === null) {
+            return self::$sexes;
+        }
+
+        if (in_array($sex, self::$sexes)) {
+            return '<input type="radio" name="sex" value="' . $sex . '"' . ($this->attributes['sex'] == $sex ? 'checked' : '') . '>' . $sex;
+        }
+    }
+
+    public function radioStarSign($star_sign = null)
+    {
+        if ($star_sign === null) {
+            return self::$star_signs;
+        }
+
+        if (in_array($star_sign, self::$star_signs)) {
+            return '<input type="radio" name="star_sign" value="' . $star_sign . '"' . ($this->attributes['star_sign'] == $star_sign ? 'checked' : '') . '>' . $star_sign;
+        }
     }
     //endregion
 }
