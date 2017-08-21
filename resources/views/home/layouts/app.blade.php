@@ -13,10 +13,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/main.css') }}">
     <link rel="stylesheet" href="{{ mix('css/self.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common2.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.css') }}">
-    <script src="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/common.css',true) }}">
+    <link rel="stylesheet" href="{{ asset('css/common2.css',true) }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.css',true) }}">
+    <script src="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.js',true) }}"></script>
     @section('css')
     @show
 </head>
