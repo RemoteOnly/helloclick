@@ -14,7 +14,7 @@ class AddDescriptionNullableConstrainToImagesTable extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            DB::statement('ALTER TABLE `images` MODIFY `description` TEXT NULL;');
+           // DB::statement('ALTER TABLE `images` MODIFY `description` TEXT NULL;');
         });
     }
 
@@ -26,7 +26,7 @@ class AddDescriptionNullableConstrainToImagesTable extends Migration
     public function down()
     {
         Schema::table('images', function (Blueprint $table) {
-            DB::statement('ALTER TABLE `images` MODIFY `description` TEXT NOT NULL;');
+          //  DB::statement('ALTER TABLE `images` MODIFY `description` TEXT NOT NULL;');
         });
     }
 }

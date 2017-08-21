@@ -11,9 +11,6 @@
 |
 */
 
-//admin
-Route::get('/admin/', 'Admin\IndexController@index');
-
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/tags/{slug}', 'HomeController@showTaggedImages')->name('show_tagged_images');
 // index 和 show_tagged_image两个页面中加载图片的方法
@@ -50,4 +47,9 @@ Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {
     Route::post('send_reset_link', 'ForgotPasswordController@sendResetLinkEmail')->name('send_reset_link');
     Route::get('reset_password/{token}', 'ResetPasswordController@showResetForm')->name('show_reset_password');
     Route::put('reset_password', 'ResetPasswordController@reset')->name('reset_password');
+});
+
+// admin
+Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
+    Route::get('_admin', 'IndexController@index')->name('index');
 });

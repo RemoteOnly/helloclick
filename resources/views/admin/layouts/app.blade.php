@@ -25,7 +25,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('admin.layouts.partials.footer')
+    @include('admin.layouts.partials.footer')
 <!-- Control Sidebar -->
     @include('admin.layouts.partials.controls_sidebar')
 </div>

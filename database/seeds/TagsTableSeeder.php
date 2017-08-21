@@ -11,8 +11,8 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        Cache::forget('banners');
-        DB::table('tags')->truncate();
+       // Cache::forget('banners');
+        //DB::table('tags')->truncate();
 
         $data = [
             ['name' => '美食', 'slug' => 'food'],

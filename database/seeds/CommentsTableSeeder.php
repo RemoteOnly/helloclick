@@ -13,7 +13,7 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('comments')->delete();
+        //DB::table('comments')->delete();
 
         $images = Image::orderBy('created_at', 'desc')->limit(4)->get();
         $users = User::all();
