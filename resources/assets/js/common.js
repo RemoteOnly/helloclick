@@ -2,50 +2,50 @@
     let Validator = require('validatorjs');
     Validator.useLang('zh');
 
-//region 窗体操作
-// 显示注册
+    //region 窗体操作
+    // 显示注册
     $('.login-nav .register').click(function () {
         $('#login-register').show();
         $('#btn-register').click();
     });
 
-// 显示登录
+    // 显示登录
     $('.login-nav .login').click(function () {
         $('#login-register').show();
         $('.email-signup-back').click();
     });
 
-// 注册
+    // 注册
     $('#btn-register').click(function () {
         $('#login_frame').children('div').not('.close').hide();
         $('.email-signup, .signup-form').show();
     });
 
-// 注册的返回登录
+    // 注册的返回登录
     $('.email-signup-back,.login-link').click(function () {
         $('#login_frame').children('div').not('.close').hide();
         $('.email-signup').children('div').hide();
         $('.login').show();
     });
 
-// 忘记密码
+    // 忘记密码
     $('.reset-password').click(function () {
         $('#login_frame').children('div').not('.close').hide();
         $('.reset').show();
     });
 
-// 忘记密码的返回登录
+    // 忘记密码的返回登录
     $('.reset .back').click(function () {
         $('#login_frame').children('div').not('.close').hide();
         $('.login').show();
     });
 
-// 关闭登录窗体
+    // 关闭登录窗体
     $('.close').click(function () {
         $('.black-overlay').hide();
     });
 
-// 登录后鼠标悬停个人头像
+    // 登录后鼠标悬停个人头像
     $('#nav_user').hover(function () {
         $('.menu').show();
     }, function () {
@@ -64,10 +64,10 @@
         $(this).hide();
     });
 
-//endregion
+    //endregion
 
-//region Ajax注册/登录
-//注册
+    //region Ajax注册/登录
+    //注册
     $('#to-register').click(function () {
         let form = $(this).closest('form');
         // jq元素对象
@@ -139,7 +139,7 @@
         });
     });
 
-// 重发验证邮件
+    // 重发验证邮件
     $('.resend').click(function () {
         let url = $(this).data('url');
         let email = $('span.email').text();
@@ -166,7 +166,7 @@
         })
     });
 
-// 登录
+    // 登录
     $('#to-login').click(function () {
         let form = $(this).closest('form');
         // jq元素对象
@@ -221,7 +221,7 @@
         });
     });
 
-// 发送重置密码链接
+    // 发送重置密码链接
     $('#to-reset-password').click(function () {
         let url = $(this).data('url');
         let email = $('.reset-form').find('[name="email"]').val();
@@ -261,9 +261,9 @@
             }
         })
     });
-//endregion
+    //endregion
 
-//region show 页面喜欢
+    //region show 页面喜欢
     $('.like-btn.btn-with-icon.btn').click(function () {
         // 检查是否登录
         if (!checkLogin()) {
@@ -310,7 +310,7 @@
         });
     });
 
-// 回复
+    // 回复
     $('.reply-button').click(function () {
         let at_user_id = $(this).data('at-user-id');
         let at_user_name = $(this).data('at-user-name');
@@ -320,7 +320,7 @@
         $('#comment-content').data('at-user-id', at_user_id);
     });
 
-// 添加评论和回复
+    // 添加评论和回复
     $('#add-comment').click(function () {
         // 检查是否登录
         if (!checkLogin()) {
@@ -368,7 +368,7 @@
         })
     });
 
-// 删除评论或回复
+    // 删除评论或回复
     $('.delete').click(function () {
         if (!checkLogin()) {
             return false;
@@ -441,20 +441,20 @@
         })
     }
 
-// 锚点
+    // 锚点
     $('a.comment-btn.btn-with-icon.btn').click(function () {
         let scroll_top = $('#pin_view_add_comment').offset().top;
         $('html,body').animate({scrollTop: scroll_top + 'px'}, 800);
     });
-//endregion
+    //endregion
 
-// 滚动顶端
+    // 滚动顶端
     $('#elevator').click(function () {
         $('html,body').animate({scrollTop: '0px'}, 800);
     });
 
-//region Functions
-// 数据出错提示
+    //region Functions
+    // 数据出错提示
     function showFormErrors(fields, errors) {
         let {name, email, password} = errors;
         // 添加出错样式
@@ -468,7 +468,7 @@
         return error_msg;
     }
 
-// 取消关注
+    // 所有关注中取消关注
     $('.cancel-following').click(function () {
         let _this = this;
         swal({
@@ -483,7 +483,7 @@
                 let user_id = $(_this).data('user-id');
                 $.ajax({
                     url: '/followings/' + user_id,
-                    method: 'delete',
+                    method: 'post',
                     dataType: 'json',
                     success: function (data) {
                         if (data.status === 1) {
@@ -505,8 +505,42 @@
             }
         });
     });
+    // 某个用户主页中关注和取关
+    $('.followuser.btn.rbtn').click(function () {
+        if (!checkLogin()) {
+            return false;
+        }
 
-// 定时器
+        let _this = this;
+        let user_id = $(this).data('user-id');
+        $.ajax({
+            url: '/followings/' + user_id,
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status === 1) {
+                    let text = $(_this).find('.text').text();
+                    if (text.indexOf('已') === -1) {
+                        text = '已关注';
+                    } else {
+                        text = '关注'
+                    }
+                    $(_this).find('.text').text(text);
+                } else {
+                    swal('', data.message, 'warning');
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 401) {
+                    $('.login.btn.wbtn').click();
+                    return false;
+                }
+
+            }
+        })
+    });
+
+    // 定时器
     function activeResend(time) {
         // 定时器
         let text_time = $('.resend').find('span');
@@ -532,7 +566,5 @@
         }
     }
 
-// endregion
-
-
+    // endregion
 })();

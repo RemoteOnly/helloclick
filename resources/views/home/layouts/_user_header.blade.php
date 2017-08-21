@@ -48,22 +48,19 @@
         <div class="action-buttons">
             @if(Auth::id() != $user->id)
                 @if($has_followed == true)
-                    <a data-urlname="bearttll" title="关注呆熊笨猪" href="#" onclick="return false;"
-                       class="followuser btn rbtn">
+                    <a href="javascript:void(0);" class="followuser btn rbtn" data-user-id="{{ $user->id }}">
                         <span class="text"> 已关注</span>
                     </a>
                 @else
-                    <a data-urlname="bearttll" title="关注呆熊笨猪" href="#" onclick="return false;"
-                       class="followuser btn rbtn">
+                    <a href="javascript:void(0);" class="followuser btn rbtn" data-user-id="{{ $user->id }}">
                         <span class="text"> 关注</span>
                     </a>
                 @endif
             @endif
         </div>
         <div class="bindings">
-            <a href="http://weibo.com/1759432433" target="_blank" class="weibo"></a>
+
         </div>
-        <div title="举报用户" class="report-user"></div>
     </div>
     {{--<div class="side">
         <h4>最多转采自</h4>
