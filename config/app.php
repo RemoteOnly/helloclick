@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +180,18 @@ return [
         // Debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        // Socialite
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
+        // Flash
+        Laracasts\Flash\FlashServiceProvider::class,
+
+        // Language
+        Overtrue\LaravelLang\TranslationServiceProvider::class,
+
+        // Purifier
+        Mews\Purifier\PurifierServiceProvider::class,
+
     ],
 
     /*
@@ -232,6 +244,11 @@ return [
         // Debugbar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
+        // Socialite
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        // Purifier
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ],
 
 ];
