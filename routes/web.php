@@ -11,6 +11,8 @@
 |
 */
 
+//admin
+Route::get('/admin/', 'Admin\IndexController@index');
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/tags/{slug}', 'HomeController@showTaggedImages')->name('show_tagged_images');
