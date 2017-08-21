@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -12,10 +13,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/main.css') }}">
     <link rel="stylesheet" href="{{ mix('css/self.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common2.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugin/sweetalert2/dist/sweetalert2.min.css') }}">
-    <script src="{{ asset('/plugin/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/common.css',true) }}">
+    <link rel="stylesheet" href="{{ asset('css/common2.css',true) }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.css',true) }}">
+    <script src="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.js',true) }}"></script>
     @section('css')
     @show
 </head>

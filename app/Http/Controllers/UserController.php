@@ -68,7 +68,7 @@ class UserController extends Controller
             $following['recent_images'] = $images;
         }
 
-        $user = $request->user()->withCount(['fans', 'images'])->first();
+        $user = User::withCount(['fans', 'images'])->find($request->user()->id);
 
         return view('home.user.followings', compact('user', 'followings'));
     }
