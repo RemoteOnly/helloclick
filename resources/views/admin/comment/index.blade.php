@@ -3,13 +3,13 @@
 @section('main_content')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">用户管理</h3>
+            <h3 class="box-title">评论管理</h3>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12 no-padding">
                         <div class="col-sm-6 no-padding">
                             <div class="btn-group">
-                                <a href="{{ route('admin.user.index') }}" class="btn btn-success btn-sm">刷新</a>
+                                <a href="{{ route('admin.comment.index') }}" class="btn btn-success btn-sm">刷新</a>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -25,7 +25,7 @@
                                         @foreach($filters as $filter => $value)
                                             <li>
                                                 <a href="javascript:void(0);" class="search"
-                                                   data-url="{{ route('admin.user.index') }}?filter={{ $filter }}&keyword=">{{ $value }}</a>
+                                                   data-url="{{ route('admin.comment.index') }}?filter={{ $filter }}&keyword=">{{ $value }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -40,64 +40,44 @@
             <table class="table table-bordered">
                 <tr>
                     <th>ID</th>
-                    <th>昵称</th>
-                    <th>角色</th>
-                    <th>邮箱</th>
-                    <th>性别</th>
-                    <th>星座</th>
-                    <th>作品数</th>
-                    <th>粉丝数</th>
-                    <th>评论</th>
-                    <th>加入时间</th>
-                    <th>状态</th>
+                    <th>图片</th>
+                    <th>品论人</th>
+                    <th>内容</th>
+                    <th>发布时间</th>
                     <th>操作</th>
                 </tr>
-                @foreach($users as $user)
+                @foreach($comments as $comment)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $comment->id }}</td>
                         <td>
-                            <a class="toggle-type" href="javascript:void(0)"
-                               data-url="{{ route('admin.user.update_type',['user_id'=>$user->id]) }}">
-                                {{ $user->type }}
-                            </a>
-                        </td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->sex }}</td>
-                        <td>{{ $user->star_sign }}</td>
-                        <td>
-                            @if( $user->images_count)
-                                <a href="{{ route('admin.image.index',['user_id'=>$user->id]) }}">
-                                    {{ $user->images_count }}
-                                </a>
-                            @else
-                                0
-                            @endif
-                        </td>
-                        <td>{{ $user->fans_count }}</td>
-                        <td>
-                            <a href="{{ route('admin.comment.index',['filter'=>'user_id','keyword'=>$user->id]) }}">
-                                查看
-                            </a>
-                        </td>
-                        <td>{{ $user->created_at->toDateString() }} <br> {{ $user->created_at->toTimeString() }} </td>
-                        <td>
-                            <a href="javascript:void(0)" class="user-forbid"
-                               data-url="{{ route('admin.user.forbid',['user_id'=>$user->id]) }}">
-                                {{ $user->deleted_at ? '已禁用':'已启用' }}
+                            <a href="{{ route('admin.comment.index',['filter'=>'image_id','keyword'=>$comment->image->id]) }}">
+                                {{ $comment->image->name }}
                             </a>
                         </td>
                         <td>
-
-                            <a href="javascript:void(0)" class="user-destroy"
-                               data-url="{{ route('admin.user.destroy',['user_id'=>$user->id]) }}">删除</a>
+                            <a href="{{ route('admin.comment.index',['filter'=>'user_id','keyword'=>$comment->user->id]) }}">
+                                {{ $comment->user->name }}
+                            </a>
+                        </td>
+                        <td>
+                            <p style="max-height: 200px;overflow-y: scroll">
+                                {!!  $comment->content  !!}
+                            </p>
+                        </td>
+                        <td>
+                            {{ $comment->created_at->toDateString() }} <br>
+                            {{ $comment->created_at->toTimeString() }}
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="comment-destroy"
+                               data-url="{{ route('admin.comment.destroy',['comment_id'=>$comment->id]) }}">删除</a>
                         </td>
                     </tr>
                 @endforeach
             </table>
         </div>
         <div class="box-footer">
-            {{ $users->render() }}
+            {{ $comments->render() }}
         </div>
     </div>
 @endsection

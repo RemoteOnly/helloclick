@@ -28,6 +28,12 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
+            <li>
+                <a href="{{ route('admin.index') }}">
+                    <i class="fa fa-th"></i>
+                    <span>首页</span>
+                </a>
+            </li>
 
             <li class="treeview">
                 <a href="#">
@@ -40,6 +46,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i> 用户管理 </a></li>
                     <li><a href="{{ route('admin.image.index') }}"><i class="fa fa-circle-o"></i> 图片管理</a></li>
+                    <li><a href="{{ route('admin.comment.index') }}"><i class="fa fa-circle-o"></i> 评论管理</a></li>
                 </ul>
             </li>
 

@@ -20,7 +20,7 @@ class CreateImageTagTable extends Migration
             $table->foreign('image_id')
                 ->references('id')
                 ->on('images')
-                ->onDlete('cascade');
+                ->onDelete('cascade');
             //$table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
