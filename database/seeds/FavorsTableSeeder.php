@@ -26,6 +26,7 @@ class FavorsTableSeeder extends Seeder
                 $temp['user_id'] = $user->id;
                 $temp['image_id'] = $image->id;
                 $temp['photographer_id'] = $image->user->id;
+                $temp['created_at'] = time();
                 array_push($data, $temp);
             }
         }
