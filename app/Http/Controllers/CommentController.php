@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
+    /**
+     * 保存一个评论
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $rules = [
@@ -56,6 +62,13 @@ class CommentController extends Controller
         return response()->json($message);
     }
 
+    /**
+     * 删除一个评论
+     *
+     * @param Request $request
+     * @param null $comment_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(Request $request, $comment_id = null)
     {
         $comment = Comment::find($comment_id);

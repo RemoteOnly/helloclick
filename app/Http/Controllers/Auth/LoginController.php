@@ -23,6 +23,7 @@ class LoginController extends Controller
 
     /**
      * Login
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -49,6 +50,7 @@ class LoginController extends Controller
 
     /**
      * Logout
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()

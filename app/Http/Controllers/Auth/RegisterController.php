@@ -25,6 +25,7 @@ class RegisterController extends Controller
 
     /**
      * Register a user
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -45,6 +46,7 @@ class RegisterController extends Controller
 
     /**
      * Active the user
+     *
      * @param Request $request
      * @param $id
      * @param $token
@@ -69,6 +71,12 @@ class RegisterController extends Controller
         return redirect()->route('index');
     }
 
+    /**
+     * resend the active link
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function resend(Request $request)
     {
         $email = $request->get('email');
