@@ -11,9 +11,6 @@
 |
 */
 
-//admin
-Route::get('/admin/', 'Admin\IndexController@index');
-
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/tags/{slug}', 'HomeController@showTaggedImages')->name('show_tagged_images');
 // index 和 show_tagged_image两个页面中加载图片的方法
@@ -50,4 +47,21 @@ Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {
     Route::post('send_reset_link', 'ForgotPasswordController@sendResetLinkEmail')->name('send_reset_link');
     Route::get('reset_password/{token}', 'ResetPasswordController@showResetForm')->name('show_reset_password');
     Route::put('reset_password', 'ResetPasswordController@reset')->name('reset_password');
+});
+
+// admin
+Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => '_admin'], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+
+    // users
+    Route::get('users', 'UserController@index')->name('user.index');
+    Route::put('users/{user_id}', 'UserController@forbid')->name('user.forbid');
+    Route::delete('users/{user_id}/force', 'UserController@destroy')->name('user.destroy');
+    Route::put('users/{user_id}/update_type', 'UserController@updateType')->name('user.update_type');
+    Route::get('users/{user_id}/images', 'UserController@imagesIndex')->name('user.images');
+
+    // images
+    Route::get('images', 'ImageController@index')->name('image.index');
+    Route::delete('images/{image_id}', 'ImageController@destroy')->name('image.destroy');
+    Route::delete('images/{image_id}/comments')->name('images.comments');
 });

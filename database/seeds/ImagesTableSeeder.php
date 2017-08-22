@@ -14,7 +14,7 @@ class ImagesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('images')->delete();
+        //DB::table('images')->delete();
 
         $tag_ids = Tag::pluck('id')->toArray();
 

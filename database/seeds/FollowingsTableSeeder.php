@@ -12,7 +12,7 @@ class FollowingsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('followings')->delete();
+        //DB::table('followings')->delete();
 
         $users = User::all();
         $data = [];
