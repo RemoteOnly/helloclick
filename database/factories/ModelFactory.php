@@ -37,6 +37,7 @@ $factory->define(\App\Models\Image::class, function (\Faker\Generator $faker) {
         'width' => $selected[0],
         'height' => $selected[1],
         'user_id' => array_first(array_random($user_ids, 1)),
-        'description' => $faker->paragraph
+        'description' => $faker->paragraph,
+        'created_at' => time()
     ];
 });

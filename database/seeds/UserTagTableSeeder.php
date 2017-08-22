@@ -33,6 +33,7 @@ class UserTagTableSeeder extends Seeder
                 $temp['user_id'] = $user->id;
                 $temp['tag_id'] = $key;
                 $temp['images_count'] = $value;
+                $temp['created_at'] = time();
                 array_push($data, $temp);
             }
         }

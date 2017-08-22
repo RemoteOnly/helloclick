@@ -21,6 +21,7 @@ class FollowingsTableSeeder extends Seeder
             $temp['user_id'] = $user->id;
             foreach ($user_ids as $user_id) {
                 $temp['photographer_id'] = $user_id;
+                $temp['created_at'] = time();
                 array_push($data, $temp);
             }
         }

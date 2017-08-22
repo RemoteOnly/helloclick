@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             $user = array_combine($keys, $values);
             $user['email_confirmed'] = 'yes';
             $user['password'] = Hash::make('666666');
+            $user['created_at'] = time();
             array_push($users, $user);
         }
 

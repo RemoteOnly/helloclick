@@ -29,6 +29,7 @@ class CommentsTableSeeder extends Seeder
             $temp['image_id'] = $image->id;
             $temp['user_id'] = $users->random(1)->first()->id;
             $temp['content'] = $content;
+            $temp['created_at'] = time();
 
             array_push($data, $temp);
         }

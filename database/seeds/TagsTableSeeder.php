@@ -11,7 +11,7 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-       // Cache::forget('banners');
+        // Cache::forget('banners');
         //DB::table('tags')->truncate();
 
         $data = [
@@ -36,6 +36,7 @@ class TagsTableSeeder extends Seeder
         foreach ($data as $key => &$item) {
             $item['display_order'] = $key;
             $item['is_banner'] = array_random(['yes', 'no', 'yes', 'yes']);
+            $item['created_at'] = time();
         }
 
         DB::table('tags')->insert($data);
