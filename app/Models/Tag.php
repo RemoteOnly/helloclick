@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $fillable = ['name', 'display_order'];
+    protected $fillable = ['name', 'slug', 'display_order', 'is_banner'];
 
     //region Scopes
     public function scopeBanners()

@@ -66,4 +66,10 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => '_admin'], f
     // comments
     Route::get('comments', 'CommentController@index')->name('comment.index');
     Route::delete('comments/{comment_id}', 'CommentController@destroy')->name('comment.destroy');
+
+    // tags
+    Route::get('tags', 'TagController@index')->name('tag.index');
+    Route::get('tags/create', 'TagController@create')->name('tag.create');
+    Route::post('tags/store', 'TagController@store')->name('tag.store');
+    Route::delete('tags/{tag_id}', 'TagController@destroy')->name('tag.destroy');
 });
