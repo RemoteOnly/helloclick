@@ -172,6 +172,33 @@
             }
         });
     });
+
+    // 评论删除comment-destroy
+    $('.comment-destroy').click(function () {
+        var result = confirm('确认删除？');
+        if (!result) {
+            return false;
+        }
+
+        var url = $(this).data('url');
+        var _this = this;
+        $.ajax({
+            url: url,
+            method: 'delete',
+            dataType: 'json',
+            success: function success(data) {
+                if (data.status === 1) {
+                    $(_this).closest('tr').remove();
+                    swal('', data.message, 'success');
+                } else {
+                    swal('', data.message, 'warning');
+                }
+            },
+            error: function error(xhr) {
+                swal('', '请求失败，请刷新重试', 'error');
+            }
+        });
+    });
 })();
 
 /***/ }),

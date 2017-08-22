@@ -47,6 +47,7 @@
                     <th>星座</th>
                     <th>作品数</th>
                     <th>粉丝数</th>
+                    <th>评论</th>
                     <th>加入时间</th>
                     <th>状态</th>
                     <th>操作</th>
@@ -74,7 +75,12 @@
                             @endif
                         </td>
                         <td>{{ $user->fans_count }}</td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>
+                            <a href="{{ route('admin.comment.index',['filter'=>'user_id','keyword'=>$user->id]) }}">
+                                查看
+                            </a>
+                        </td>
+                        <td>{{ $user->created_at->toDateString() }} <br> {{ $user->created_at->toTimeString() }} </td>
                         <td>
                             <a href="javascript:void(0)" class="user-forbid"
                                data-url="{{ route('admin.user.forbid',['user_id'=>$user->id]) }}">
