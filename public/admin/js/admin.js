@@ -120,12 +120,13 @@
 
     // 删除用户
     $('.user-destroy').click(function () {
-        var url = $(this).data('url');
-        var _this = this;
         var result = confirm('确认删除?');
         if (!result) {
             return false;
         }
+
+        var url = $(this).data('url');
+        var _this = this;
 
         $.ajax({
             url: url,
@@ -141,6 +142,33 @@
             },
             error: function error(xhr) {
                 swal('', '请求出错，请刷新重试', 'error');
+            }
+        });
+    });
+
+    // 图片删除
+    $('.image-destroy').click(function () {
+        var result = confirm('确认删除？');
+        if (!result) {
+            return false;
+        }
+
+        var url = $(this).data('url');
+        var _this = this;
+        $.ajax({
+            url: url,
+            method: 'delete',
+            dataType: 'json',
+            success: function success(data) {
+                if (data.status === 1) {
+                    $(_this).closest('tr').remove();
+                    swal('', data.message, 'success');
+                } else {
+                    swal('', data.message, 'warning');
+                }
+            },
+            error: function error(xhr) {
+                swal('', '请求失败，请刷新重试', 'error');
             }
         });
     });

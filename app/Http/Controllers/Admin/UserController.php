@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,7 +43,6 @@ class UserController extends Controller
             ->with('filters', self::$filters);
     }
 
-
     /**
      * 切换用户type
      *
@@ -70,7 +68,6 @@ class UserController extends Controller
 
         return response()->json(['status' => 1, 'message' => '切换成功', 'type' => $user->type]);
     }
-
 
     /**
      * 禁用用户
@@ -99,7 +96,6 @@ class UserController extends Controller
         ]);
     }
 
-
     /**
      * 硬删除用户
      *
@@ -117,5 +113,14 @@ class UserController extends Controller
         $user->forceDelete();
 
         return response()->json(['status' => 1, 'message' => '删除成功']);
+    }
+
+    public function images(Request $request, $user_id)
+    {
+        $user = User::withTrashed()
+            ->with('images')
+            ->find($user_id);
+
+        return view('admin.image.index', compact('user'));
     }
 }
