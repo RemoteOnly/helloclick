@@ -3,35 +3,33 @@
 @section('html_header')
     @include('admin.layouts.partials.html_header')
 @show
-<!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
-<!-- the fixed layout is not compatible with sidebar-mini -->
 <body class="hold-transition skin-blue fixed sidebar-mini">
-<!-- Site wrapper -->
 <div class="wrapper">
-@include('admin.layouts.partials.main_header')
-<!-- =============================================== -->
-    <!-- Left side column. contains the sidebar -->
-@include('admin.layouts.partials.sidebar')
-<!-- =============================================== -->
-    <!-- Content Wrapper. Contains page content -->
+    @include('admin.layouts.partials.main_header')
+    @include('admin.layouts.partials.sidebar')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-    @include('admin.layouts.partials.content_header')
-    <!-- Main content -->
+        @include('admin.layouts.partials.content_header')
+
         <section class="content">
             @yield('main_content')
         </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
 
-    @include('admin.layouts.partials.footer')
-<!-- Control Sidebar -->
-    @include('admin.layouts.partials.controls_sidebar')
+        @include('admin.layouts.partials.footer')
+        @include('admin.layouts.partials.controls_sidebar')
+    </div>
 </div>
-<!-- ./wrapper -->
 </body>
+@include('admin.layouts.partials.script')
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
 @section('script')
-    @include('admin.layouts.partials.script')
+
 @show
 </html>

@@ -50,6 +50,18 @@ Route::group(['as' => 'auth.', 'namespace' => 'Auth'], function () {
 });
 
 // admin
-Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
-    Route::get('_admin', 'IndexController@index')->name('index');
+Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => '_admin'], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+
+    // users
+    Route::get('users', 'UserController@index')->name('user.index');
+    Route::put('users/{user_id}', 'UserController@forbid')->name('user.forbid');
+    Route::delete('users/{user_id}/force', 'UserController@destroy')->name('user.destroy');
+    Route::put('users/{user_id}/update_type', 'UserController@updateType')->name('user.update_type');
+    Route::get('users/{user_id}/images', 'UserController@imagesIndex')->name('user.images');
+
+    // images
+    Route::get('images', 'ImageController@index')->name('image.index');
+    Route::delete('images/{image_id}', 'ImageController@destroy')->name('image.destroy');
+    Route::delete('images/{image_id}/comments')->name('images.comments');
 });

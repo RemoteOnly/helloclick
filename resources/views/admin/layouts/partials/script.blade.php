@@ -10,3 +10,4 @@
 <script src="{{ asset('/admin/js/app.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/admin/js/demo.js') }}"></script>
+<script src="{{ asset('/plugins/sweetalert2/dist/sweetalert2.min.js') }}"></script>

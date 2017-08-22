@@ -32,14 +32,14 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span>基础管理</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i> 用户管理 </a></li>
+                    <li><a href="{{ route('admin.image.index') }}"><i class="fa fa-circle-o"></i> 图片管理</a></li>
                 </ul>
             </li>
 
