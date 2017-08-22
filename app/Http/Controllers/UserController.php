@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
+    /**
+     * 用户主页
+     *
+     * @param Request $request
+     * @param null $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function index(Request $request, $id = null)
     {
         $slug = $request->get('slug');
@@ -52,6 +59,12 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * 用户的关注列表
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function followings(Request $request)
     {
         $followings = User::whereHas('fans', function ($query) use ($request) {
@@ -73,18 +86,12 @@ class UserController extends Controller
         return view('home.user.followings', compact('user', 'followings'));
     }
 
-    public function cancelFollowing(Request $request, $user_id)
-    {
-        $count = Auth::user()->followings()->detach($user_id);
-        if ($count) {
-            $message = ['status' => 1, 'message' => '取消关注成功'];
-        } else {
-            $message = ['status' => 0, 'message' => '取消关注失败'];
-        }
-
-        return response()->json($message);
-    }
-
+    /**
+     * 切换关注
+     * @param Request $request
+     * @param $user_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function toggleFollowing(Request $request, $user_id)
     {
         $changes = Auth::user()->followings()->toggle($user_id);
@@ -99,6 +106,12 @@ class UserController extends Controller
         return response()->json($message);
     }
 
+    /**
+     * 显示喜欢的图片的列表
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showFavors(Request $request)
     {
         $user = User::with('tags')
@@ -126,6 +139,12 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * 喜欢某个图片
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
     public function favor(Request $request)
     {
         if ($request->ajax()) {
@@ -164,6 +183,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 显示用户设置页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function settings()
     {
         $user = Auth::user();

@@ -45,6 +45,13 @@ class HomeController extends Controller
         return view('home.index.index', compact('load_images_url', 'recommended_users'));
     }
 
+    /**
+     * 显示图片内容
+     *
+     * @param Request $request
+     * @param null $image_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function show(Request $request, $image_id = null)
     {
         $image = Image::with(['user', 'tags'])->find($image_id);
@@ -69,6 +76,13 @@ class HomeController extends Controller
         return view('home.index.show', compact('image', 'new_images', 'comments'));
     }
 
+    /**
+     * 获取指定tag下的图片列表
+     *
+     * @param Request $request
+     * @param null $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function showTaggedImages(Request $request, $slug = null)
     {
         $tag = Tag::where('slug', $slug)->first();

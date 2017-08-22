@@ -24,6 +24,7 @@ class ResetPasswordController extends Controller
 
     /**
      * 显示重置密码表单
+     *
      * @param Request $request
      * @param null $token
      * @return $this
@@ -37,6 +38,7 @@ class ResetPasswordController extends Controller
 
     /**
      * 重置密码
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */

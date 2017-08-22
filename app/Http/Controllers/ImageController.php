@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class ImageController extends Controller
 {
+    /**
+     * 用来提供瀑布流加载时图片的读取
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function loadImages(Request $request)
     {
         $offset = $request->get('offset', 0);

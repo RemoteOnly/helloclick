@@ -27,6 +27,7 @@ class ForgotPasswordController extends Controller
 
     /**
      * Send reset password link
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
